@@ -11,8 +11,13 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatTabsModule} from '@angular/material/tabs';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
+import { LoginComponent } from './componentes/login/login.component';
+import { RegisterComponent } from './componentes/register/register.component';
 import { CartillaComponent } from './componentes/cartilla/cartilla.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
  
 @NgModule({
@@ -22,6 +27,8 @@ import {MatTableModule} from '@angular/material/table';
     PrincipalComponent,
     TurnosComponent,
     CartillaComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,10 @@ import {MatTableModule} from '@angular/material/table';
     BrowserAnimationsModule,
     MatSliderModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
