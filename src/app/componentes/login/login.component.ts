@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import{ FirebaseService}from '../../servicios/firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,15 @@ import {FormControl, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
+  usuario = '';
+  clave= '';
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public firebaseServiceService:FirebaseService) {
+
+  }
 
   ngOnInit(): void {
   }
@@ -21,6 +30,10 @@ export class LoginComponent implements OnInit {
     }
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  login(){
+    this.firebaseServiceService.login(this.usuario,this.clave, );
   }
 
 }

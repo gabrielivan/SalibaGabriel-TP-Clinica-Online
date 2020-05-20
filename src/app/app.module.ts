@@ -18,7 +18,14 @@ import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import{firebaseConfig}from '../environments/environment'
+    // Initialize Cloud Firestore through Firebase
+    firebase.initializeApp(firebaseConfig);
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
  
 @NgModule({
   declarations: [
@@ -41,6 +48,7 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [],
   bootstrap: [AppComponent]
