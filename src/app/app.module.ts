@@ -18,6 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -48,6 +49,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [],

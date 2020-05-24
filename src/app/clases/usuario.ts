@@ -24,7 +24,7 @@ export class Usuario {
 }
 
 export enum Tipo {
-    Administrador = 1,
+    Paciente = 1,
     Profesional = 2,
-    Paciente = 3
+    Administrador = 3
   }
