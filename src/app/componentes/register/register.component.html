@@ -12,60 +12,65 @@
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su nombre</mat-label>
-                    <input matInput placeholder="example@example.com" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Nombre" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su apellido</mat-label>
-                    <input matInput placeholder="example@example.com" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Apellido" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su sexo</mat-label>
-                    <input matInput placeholder="example@example.com" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Sexo" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su fecha de nacimiento</mat-label>
-                    <input matInput placeholder="example@example.com" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.FechaDeNacimiento" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su email</mat-label>
-                    <input matInput placeholder="example@example.com" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Email" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
-                    <mat-label>Ingrese su contraseña</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <mat-label>Ingrese su clave</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="clave">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                     </button>
                 </mat-form-field>
             </div>
+            <div class="inputContent" *ngIf="esProfesional()">
+                <mat-form-field>
+                    <mat-label>Especialidad</mat-label>
+                    <mat-select [(ngModel)]="Especialidad">
+                        <mat-option value="1">Dermatología</mat-option>
+                        <mat-option value="2">Traumatología</mat-option>
+                        <mat-option value="3">Ginecología</mat-option>
+                        <mat-option value="4">Cardiología</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
             <div class="inputContent">
                 <mat-form-field>
                     <mat-label>Tipo de usuario</mat-label>
-                    <mat-select>
-                        <mat-option value="option1">Paciente</mat-option>
-                        <mat-option value="option2">Profesional</mat-option>
-                        <mat-option value="option3">Administrador</mat-option>
+                    <mat-select [(ngModel)]="usuario.Tipo">
+                        <mat-option value="1">Paciente</mat-option>
+                        <mat-option value="2">Profesional</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button style="width: 75%;" mat-button>Registrarse</button>
+            <button (click)="register()" style="width: 75%;" mat-button>Registrarse</button>
         </mat-card-actions>
     </mat-card>
 </div>

@@ -7,10 +7,12 @@ export class Usuario {
     FechaDeNacimiento: string;
     Email: string;
     Foto: string;
-    Tipo: Tipo;
+    Tipo: TipoDeUsuario;
+    IsDeleted: number;
+    IsValidated: number;
 
   
-    public constructor(id: number, nombre: string, apellido: string, sexo: string, fechaDeNacimiento: string, email: string, foto: string, tipo: Tipo) { 
+    public constructor(id: number, nombre: string, apellido: string, sexo: string, fechaDeNacimiento: string, email: string, foto: string, tipo: TipoDeUsuario, isDeleted: number, isValidated: number) { 
         this.Id = id;
         this.Nombre = nombre;
         this.Apellido = apellido;
@@ -19,12 +21,14 @@ export class Usuario {
         this.Email = email;
         this.Foto = foto;
         this.Tipo = tipo;
+        this.IsDeleted = isDeleted;
+        this.IsValidated = isValidated;
     }
     
 }
 
-export enum Tipo {
-    Paciente = 1,
-    Profesional = 2,
-    Administrador = 3
+ export enum TipoDeUsuario {
+    Paciente = "1",
+    Profesional = "2",
+    Administrador = "3"
   }

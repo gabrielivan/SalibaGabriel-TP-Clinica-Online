@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import swal from'sweetalert2';
+import { Usuario, TipoDeUsuario } from "../clases/usuario";
+import {Especialidad} from "../clases/profesional";
 import "firebase/auth";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
@@ -16,20 +18,29 @@ export class FirebaseService {
 
   db = firebase.firestore();
 
-  AddUser(nombre, apellido, email, clave, sexo, fechaDeNacimiento, tipo) {
+  AddUser(usuario: Usuario, especialidad: Especialidad, fotoDos: string, clave: string) {
     var dbRef = this.db;
     var router = this.router;
-    firebase.auth().createUserWithEmailAndPassword(email, clave)
+    var validated = 1;
+    if(usuario.Tipo == TipoDeUsuario.Profesional){
+      validated = 0;
+    }
+    firebase.auth().createUserWithEmailAndPassword(usuario.Email, clave)
       .then(function (credential) {
         console.log(credential.user.uid);
         dbRef.collection("usuarios").add({
           uid: credential.user.uid,
-          email: email,
-          nombre: nombre,
-          apellido: apellido,
-          sexo: sexo,
-          fechaDeNacimiento: fechaDeNacimiento,
-          tipo: tipo
+          nombre: usuario.Nombre,
+          apellido: usuario.Apellido,
+          sexo: usuario.Sexo,
+          fechaDeNacimiento: usuario.FechaDeNacimiento,
+          email: usuario.Email,
+          foto: usuario.Foto,
+          fotoDos: fotoDos,
+          especialidad: especialidad,
+          tipo: usuario.Tipo,
+          isDeleted: 0,
+          isValidated: validated
         })
           .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
