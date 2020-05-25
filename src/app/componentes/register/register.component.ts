@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   hide = true;
   usuario: Usuario = new Usuario(0, "", "", "", "", "", "", TipoDeUsuario.Paciente, 0, 0);
-  Especialidad: Especialidad;
+  Especialidad: Especialidad = null;
   fotoDos = "";
   clave = "";
 
@@ -33,6 +33,10 @@ export class RegisterComponent implements OnInit {
 
   esProfesional(){
     return this.usuario.Tipo == TipoDeUsuario.Profesional;
+  }
+
+  onImageUpload(url){
+    this.usuario.Foto = url;
   }
 
 }

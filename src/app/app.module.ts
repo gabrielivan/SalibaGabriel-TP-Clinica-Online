@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
  
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './componentes/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -27,6 +27,7 @@ import{firebaseConfig}from '../environments/environment'
     firebase.initializeApp(firebaseConfig);
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { CargaImagenComponent } from './componentes/carga-imagen/carga-imagen.component';
  
 @NgModule({
   declarations: [
@@ -37,11 +38,13 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     CartillaComponent,
     LoginComponent,
     RegisterComponent,
+    CargaImagenComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatTabsModule,

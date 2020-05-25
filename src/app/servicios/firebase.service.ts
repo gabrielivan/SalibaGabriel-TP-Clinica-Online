@@ -6,6 +6,7 @@ import "firebase/auth";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import { Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class FirebaseService {
 
   user = null;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private storage: AngularFireStorage) { }
 
   db = firebase.firestore();
 
@@ -150,6 +151,14 @@ export class FirebaseService {
     firebase.auth().onAuthStateChanged(async user => {
       this.user = user;
     });
+  }
+
+   public subirArchivo(nombreArchivo: string, obj: any) {
+    return this.storage.upload(nombreArchivo, obj);
+  }
+
+  public referenciaArchivo(nombreArchivo: string) {
+    return this.storage.ref(nombreArchivo);
   }
 
 }
