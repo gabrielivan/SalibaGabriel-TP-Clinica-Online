@@ -50,14 +50,11 @@
             </div>
             <div class="inputContent" *ngIf="esProfesional()">
                 <mat-form-field>
-                    <mat-label>Especialidad</mat-label>
-                    <mat-select [(ngModel)]="Especialidad">
-                        <mat-option value="1">Dermatología</mat-option>
-                        <mat-option value="2">Traumatología</mat-option>
-                        <mat-option value="3">Ginecología</mat-option>
-                        <mat-option value="4">Cardiología</mat-option>
+                    <mat-label>Especialidades</mat-label>
+                    <mat-select [(ngModel)]="especialidadesSeleccionadas" multiple>
+                      <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad">{{especialidad}}</mat-option>
                     </mat-select>
-                </mat-form-field>
+                  </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field>
@@ -69,7 +66,7 @@
                 </mat-form-field>
             </div>
             <app-carga-imagen (imageUrl) = onImageUpload($event)></app-carga-imagen>
-            <app-carga-imagen (imageUrl) = onImage2Upload($event)></app-carga-imagen>
+            <app-carga-imagen (imageUrl) = onImage2Upload($event) *ngIf="esPaciente()"></app-carga-imagen>
         </mat-card-content>
         <mat-card-actions>
             <button (click)="register()" style="width: 75%;" mat-button>Registrarse</button>

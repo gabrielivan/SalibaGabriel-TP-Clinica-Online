@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import swal from'sweetalert2';
 import { Usuario, TipoDeUsuario } from "../clases/usuario";
-import {Especialidad} from "../clases/profesional";
 import "firebase/auth";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
@@ -19,7 +18,7 @@ export class FirebaseService {
 
   db = firebase.firestore();
 
-  AddUser(usuario: Usuario, especialidad: Especialidad, fotoDos: string, clave: string) {
+  AddUser(usuario: Usuario, especialidades: string[], fotoDos: string, clave: string) {
     var dbRef = this.db;
     var router = this.router;
     var validated = 1;
@@ -38,7 +37,7 @@ export class FirebaseService {
           email: usuario.Email,
           foto: usuario.Foto,
           fotoDos: fotoDos,
-          especialidad: especialidad,
+          especialidades: especialidades,
           tipo: usuario.Tipo,
           isDeleted: 0,
           isValidated: validated
@@ -159,6 +158,15 @@ export class FirebaseService {
 
   public referenciaArchivo(nombreArchivo: string) {
     return this.storage.ref(nombreArchivo);
+  }
+
+  async getEspecialidades() {
+    let espRef = await this.db.collection('especialidades').get();
+    var rv = [];
+    for (let e of espRef.docs) {
+      rv.push(e.data());
+    }
+    return rv.map(function(x){return x.nombre});
   }
 
 }
