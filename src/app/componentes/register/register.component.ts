@@ -38,5 +38,8 @@ export class RegisterComponent implements OnInit {
   onImageUpload(url){
     this.usuario.Foto = url;
   }
+  onImage2Upload(url){
+    this.fotoDos = url;
+  }
 
 }
