@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   hide = true;
   usuario: Usuario = new Usuario(0, "", "", "", "", "", "", TipoDeUsuario.Paciente, 0, 0);
   especialidades: any = [];
-  especialidadesSeleccionadas: string [];
+  especialidadesSeleccionadas: string [] = null;
   fotoDos = "";
   clave = "";
 
