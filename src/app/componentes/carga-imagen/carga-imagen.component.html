@@ -15,9 +15,9 @@
             </span>
           </label>
         </div>
-        <hr>
         <progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success" value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
         <button [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
       </form>
     </div>
+    <br />
   </div>

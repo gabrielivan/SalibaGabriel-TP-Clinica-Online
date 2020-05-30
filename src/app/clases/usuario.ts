@@ -4,7 +4,7 @@ export class Usuario {
     Nombre : string;
     Apellido : string;
     Sexo : string;
-    FechaDeNacimiento: string;
+    FechaDeNacimiento: Date;
     Email: string;
     Foto: string;
     Tipo: TipoDeUsuario;
@@ -12,7 +12,7 @@ export class Usuario {
     IsValidated: number;
 
   
-    public constructor(id: number, nombre: string, apellido: string, sexo: string, fechaDeNacimiento: string, email: string, foto: string, tipo: TipoDeUsuario, isDeleted: number, isValidated: number) { 
+    public constructor(id: number, nombre: string, apellido: string, sexo: string, fechaDeNacimiento: Date, email: string, foto: string, tipo: TipoDeUsuario, isDeleted: number, isValidated: number) { 
         this.Id = id;
         this.Nombre = nombre;
         this.Apellido = apellido;

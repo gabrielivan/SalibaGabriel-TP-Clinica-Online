@@ -12,31 +12,38 @@
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su nombre</mat-label>
-                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Nombre" required>
+                    <input matInput placeholder="nombre" [(ngModel)]="usuario.Nombre" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su apellido</mat-label>
-                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Apellido" required>
+                    <input matInput placeholder="apellido" [(ngModel)]="usuario.Apellido" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
-                    <mat-label>Ingrese su sexo</mat-label>
-                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Sexo" required>
+                    <mat-label>Sexo</mat-label>
+                    <mat-select [(ngModel)]="usuario.Sexo" required>
+                        <mat-option value="Masculino">
+                            Masculino
+                        </mat-option>
+                        <mat-option value="Femenino">
+                            Femenino
+                        </mat-option>
+                      </mat-select>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su fecha de nacimiento</mat-label>
-                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.FechaDeNacimiento" required>
+                    <input type="date" matInput placeholder="dd/mm/yyyy" [(ngModel)]="usuario.FechaDeNacimiento" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su email</mat-label>
-                    <input matInput placeholder="example@example.com" [(ngModel)]="usuario.Email" required>
+                    <input matInput placeholder="usuario@usuario.com" [(ngModel)]="usuario.Email" required>
                 </mat-form-field>
             </div>
             <div class="inputContent">

@@ -12,14 +12,12 @@ import { Usuario, TipoDeUsuario } from 'src/app/clases/usuario';
 export class RegisterComponent implements OnInit {
 
   hide = true;
-  usuario: Usuario = new Usuario(0, "", "", "", "", "", "", TipoDeUsuario.Paciente, 0, 0);
+  date = new Date;
+  usuario: Usuario = new Usuario(0, "", "", "", this.date, "", "", TipoDeUsuario.Paciente, 0, 0);
   especialidades: any = [];
   especialidadesSeleccionadas: string [] = null;
   fotoDos = "";
   clave = "";
-
-  // toppings = new FormControl();
-  // toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
   constructor(public firebaseService: FirebaseService) {
   }
