@@ -3,5 +3,5 @@
     <mat-tab label="Turnos"> Turnos </mat-tab>
     <mat-tab label="Cartilla"> <app-cartilla></app-cartilla> </mat-tab>
     <mat-tab label="Acerca de Nosotros"> Acerca de Nosotros </mat-tab>
-    <mat-tab label="Crear Administrador"> <app-register></app-register> </mat-tab>
+    <mat-tab *ngIf="isAdmin" label="Crear Administrador"> <app-register></app-register> </mat-tab>
 </mat-tab-group>

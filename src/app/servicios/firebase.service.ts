@@ -169,4 +169,25 @@ export class FirebaseService {
     return rv.map(function(x){return x.nombre});
   }
 
+  async getAuthCurrentUser() {
+    return firebase.auth().currentUser;
+  }
+
+  async getUser(id: string) {
+    let usrsRef = await this.db.collection('usuarios')
+      .where("uid", "==", id)
+      .get();
+    return usrsRef.docs.shift().data() as Usuario;
+  }
+
+  async getUsers() {
+    // return await db.collection("usuarios").get();
+    let usrsRef = await this.db.collection('usuarios').get();
+    var rv = [];
+    for (let u of usrsRef.docs) {
+      rv.push(u.data() as Usuario);
+    }
+    return rv;
+  }
+
 }
