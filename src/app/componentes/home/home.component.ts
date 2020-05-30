@@ -9,9 +9,8 @@ import { Usuario, TipoDeUsuario } from 'src/app/clases/usuario';
 })
 export class HomeComponent implements OnInit {
 
-  isAdmin = false;
   currentUser: any;
-  
+
   constructor(public firebaseService: FirebaseService) { }
 
   async ngOnInit() {
@@ -19,11 +18,16 @@ export class HomeComponent implements OnInit {
     var authCurrentUser = await this.firebaseService.getAuthCurrentUser();
     this.currentUser = await this.firebaseService.getUser(authCurrentUser.uid);
     console.log(this.currentUser);
-    this.isAdmin = this.currentUser.tipo == "3"; //es administrador
   }
 
   public delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  esAdministrador() {
+    if (this.currentUser != null) {
+      return this.currentUser.tipo == TipoDeUsuario.Administrador;
+    }
   }
 
 }

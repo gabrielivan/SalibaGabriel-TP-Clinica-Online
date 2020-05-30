@@ -63,12 +63,20 @@
                     </mat-select>
                   </mat-form-field>
             </div>
-            <div class="inputContent">
+            <div *ngIf="!esAdministrador()" class="inputContent">
                 <mat-form-field>
                     <mat-label>Tipo de usuario</mat-label>
                     <mat-select [(ngModel)]="usuario.Tipo">
                         <mat-option value="1">Paciente</mat-option>
                         <mat-option value="2">Profesional</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="esAdministrador()" class="inputContent">
+                <mat-form-field>
+                    <mat-label>Tipo de usuario</mat-label>
+                    <mat-select [(ngModel)]="usuario.Tipo">
+                        <mat-option value="3">Administrador</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

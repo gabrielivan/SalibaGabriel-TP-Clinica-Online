@@ -11,10 +11,10 @@ import { Usuario, TipoDeUsuario } from 'src/app/clases/usuario';
 })
 export class RegisterComponent implements OnInit {
 
-  currentUser: Usuario;
+  currentUser: any;
   hide = true;
   date = new Date;
-  usuario: Usuario = new Usuario(0, "", "", "", this.date, "", "", TipoDeUsuario.Paciente, 0, 0);
+  usuario: Usuario = new Usuario(0, "", "", "", this.date, "", "", TipoDeUsuario.Administrador, 0, 0);
   especialidades: any = [];
   especialidadesSeleccionadas: string[] = null;
   fotoDos = "";
@@ -46,6 +46,12 @@ export class RegisterComponent implements OnInit {
 
   esPaciente() {
     return this.usuario.Tipo == TipoDeUsuario.Paciente;
+  }
+
+  esAdministrador() {
+    if (this.currentUser != null) {
+      return this.currentUser.tipo == TipoDeUsuario.Administrador;
+    }
   }
 
   onImageUpload(url) {
