@@ -19,6 +19,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -29,6 +33,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { CargaImagenComponent } from './componentes/carga-imagen/carga-imagen.component';
 import { AgregarTurnoComponent } from './componentes/agregar-turno/agregar-turno.component';
+import { CalendarioComponent } from './componentes/calendario/calendario.component';
  
 @NgModule({
   declarations: [
@@ -41,6 +46,7 @@ import { AgregarTurnoComponent } from './componentes/agregar-turno/agregar-turno
     RegisterComponent,
     CargaImagenComponent,
     AgregarTurnoComponent,
+    CalendarioComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,9 +61,14 @@ import { AgregarTurnoComponent } from './componentes/agregar-turno/agregar-turno
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDatepickerModule,
     AngularFireModule.initializeApp(firebaseConfig),
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MomentUtcDateAdapter }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

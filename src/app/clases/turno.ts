@@ -1,14 +1,16 @@
 export class Turno {
 
-    Id : number;
-    IdProfesional : number;
-    IdPaciente : number;
-    Estado : Estado;
+    Id: number;
+    IdProfesional: string;
+    IdPaciente: string;
+    Estado: Estado;
+    Fecha: Date;
 
-    public constructor(id: number, idProfesional: number, idPaciente: number, estado: Estado) { 
+    public constructor(id: number, idProfesional: string, idPaciente: string, fecha: Date, estado: Estado) { 
         this.Id = id;
         this.IdProfesional = idProfesional;
         this.IdPaciente = idPaciente;
+        this.Fecha = fecha;
         this.Estado = estado;
     }
     

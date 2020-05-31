@@ -6,6 +6,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Turno } from '../clases/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -186,6 +187,20 @@ export class FirebaseService {
     var rv = [];
     for (let u of usrsRef.docs) {
       rv.push(u.data() as Usuario);
+    }
+    return rv;
+  }
+
+  async getShifts() {
+    let usrsRef = await this.db.collection('turnos').get();
+    var rv = [];
+    for (let u of usrsRef.docs) {
+      rv.push(u.data() as Turno);
+    }
+    for(let r of rv){
+      let unix_timestamp = r.fecha.seconds
+      var date = new Date(unix_timestamp * 1000);
+      r.fecha = date;
     }
     return rv;
   }
