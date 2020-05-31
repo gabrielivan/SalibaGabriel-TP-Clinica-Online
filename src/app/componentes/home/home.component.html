@@ -4,4 +4,5 @@
     <mat-tab label="Cartilla"> <app-cartilla></app-cartilla> </mat-tab>
     <mat-tab label="Acerca de Nosotros"> Acerca de Nosotros </mat-tab>
     <mat-tab *ngIf="esAdministrador()" label="Crear Administrador"> <app-register></app-register> </mat-tab>
+    <mat-tab *ngIf="esPaciente()" label="Pedir Turno"> <app-agregar-turno></app-agregar-turno> </mat-tab>
 </mat-tab-group>

@@ -30,4 +30,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  esPaciente() {
+    if (this.currentUser != null) {
+      return this.currentUser.tipo == TipoDeUsuario.Paciente;
+    }
+  }
+
 }

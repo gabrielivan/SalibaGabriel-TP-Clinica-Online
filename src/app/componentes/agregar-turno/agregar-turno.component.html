@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<div class="container">
+    <div class="inputContent">
+        <mat-form-field>
+            <mat-label>Especialidades</mat-label>
+            <mat-select [(ngModel)]="especialidadesSeleccionadas" multiple>
+              <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad">{{especialidad}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="inputContent">
+        <mat-form-field>
+            <mat-label>Profesionales</mat-label>
+            <mat-select [(ngModel)]="profesionalSeleccionado">
+              <mat-option *ngFor="let profesional of profesionales" [value]="profesional">{{profesional.apellido}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+</div>

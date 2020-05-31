@@ -28,6 +28,7 @@ import{firebaseConfig}from '../environments/environment'
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { CargaImagenComponent } from './componentes/carga-imagen/carga-imagen.component';
+import { AgregarTurnoComponent } from './componentes/agregar-turno/agregar-turno.component';
  
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CargaImagenComponent } from './componentes/carga-imagen/carga-imagen.co
     LoginComponent,
     RegisterComponent,
     CargaImagenComponent,
+    AgregarTurnoComponent,
   ],
   imports: [
     BrowserModule,
