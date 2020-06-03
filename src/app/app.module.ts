@@ -35,6 +35,7 @@ import { CargaImagenComponent } from './componentes/carga-imagen/carga-imagen.co
 import { AgregarTurnoComponent } from './componentes/agregar-turno/agregar-turno.component';
 import { CalendarioComponent } from './componentes/calendario/calendario.component';
 import { FiltrarProfesionalesPipe } from './pipes/filtrar-profesionales.pipe';
+import { AgregarDisponibilidadComponent } from './componentes/agregar-disponibilidad/agregar-disponibilidad.component';
  
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { FiltrarProfesionalesPipe } from './pipes/filtrar-profesionales.pipe';
     AgregarTurnoComponent,
     CalendarioComponent,
     FiltrarProfesionalesPipe,
+    AgregarDisponibilidadComponent,
   ],
   imports: [
     BrowserModule,

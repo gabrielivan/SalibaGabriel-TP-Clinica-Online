@@ -36,4 +36,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  esProfesional() {
+    if (this.currentUser != null) {
+      return this.currentUser.tipo == TipoDeUsuario.Profesional;
+    }
+  }
+
 }

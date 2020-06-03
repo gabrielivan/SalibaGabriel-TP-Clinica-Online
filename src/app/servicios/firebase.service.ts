@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import swal from'sweetalert2';
+import swal from 'sweetalert2';
 import { Usuario, TipoDeUsuario } from "../clases/usuario";
 import "firebase/auth";
 import * as firebase from "firebase/app";
@@ -23,7 +23,7 @@ export class FirebaseService {
     var dbRef = this.db;
     var router = this.router;
     var validated = 1;
-    if(usuario.Tipo == TipoDeUsuario.Profesional){
+    if (usuario.Tipo == TipoDeUsuario.Profesional) {
       validated = 0;
     }
     firebase.auth().createUserWithEmailAndPassword(usuario.Email, clave)
@@ -153,7 +153,7 @@ export class FirebaseService {
     });
   }
 
-   public subirArchivo(nombreArchivo: string, obj: any) {
+  public subirArchivo(nombreArchivo: string, obj: any) {
     return this.storage.upload(nombreArchivo, obj);
   }
 
@@ -167,7 +167,7 @@ export class FirebaseService {
     for (let e of espRef.docs) {
       rv.push(e.data());
     }
-    return rv.map(function(x){return x.nombre});
+    return rv.map(function (x) { return x.nombre });
   }
 
   async getAuthCurrentUser() {
@@ -197,12 +197,16 @@ export class FirebaseService {
     for (let u of usrsRef.docs) {
       rv.push(u.data() as Turno);
     }
-    for(let r of rv){
+    for (let r of rv) {
       let unix_timestamp = r.fecha.seconds
       var date = new Date(unix_timestamp * 1000);
       r.fecha = date;
     }
     return rv;
+  }
+
+  async guardarDisponibilidad(profesional: any, disponibilidad: any) {
+    //hacer add / update de propiedad(disponibilidad)
   }
 
 }
