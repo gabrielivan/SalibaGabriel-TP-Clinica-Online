@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Profesional } from 'src/app/clases/profesional';
 
 @Component({
   selector: 'app-calendario',
@@ -8,6 +9,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class CalendarioComponent implements OnInit {
 
   @Output() fechaElegida: EventEmitter<any>= new EventEmitter<any>();
+  @Input() profesional: Profesional;
   
   fechaMinima = new Date();
   fechaSeleccionada: Date = null; 
@@ -24,6 +26,8 @@ export class CalendarioComponent implements OnInit {
 
   public async seCambioLaFecha(event) {
     console.log(this.fechaSeleccionada);
+    console.log(this.profesional);
+    console.log(this.profesional.Disponibilidad);
   }
   
   constructor() { }

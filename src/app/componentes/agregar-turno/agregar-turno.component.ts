@@ -24,6 +24,7 @@ export class AgregarTurnoComponent implements OnInit {
 
   async ngOnInit() {
     this.especialidades = await this.firebaseService.getEspecialidades();
+    this.especialidades.push("Sin especialidad");
     this.usuarios = await this.firebaseService.getUsers();
     this.turnos = await this.firebaseService.getShifts();
     console.log(this.turnos);

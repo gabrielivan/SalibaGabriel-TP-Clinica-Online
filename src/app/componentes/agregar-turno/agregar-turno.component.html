@@ -13,11 +13,11 @@
         <mat-form-field>
             <mat-label>Profesionales</mat-label>
             <mat-select [(ngModel)]="profesionalSeleccionado">
-              <mat-option *ngFor="let profesional of profesionales" [value]="profesional">{{profesional.apellido}}</mat-option>
+              <mat-option *ngFor="let profesional of profesionales | filtrarProfesionales: especialidadSeleccionada" [value]="profesional">{{profesional.apellido}}</mat-option>
             </mat-select>
           </mat-form-field>
     </div>
-    <app-calendario (fechaElegida) = fechaElegida($event)></app-calendario>
+    <app-calendario [profesional]="profesionalSeleccionado" (fechaElegida) = fechaElegida($event)></app-calendario>
 
     <button mat-raised-button color="primary" (click)="crearTurno()">Crear Turno</button>
 </div>

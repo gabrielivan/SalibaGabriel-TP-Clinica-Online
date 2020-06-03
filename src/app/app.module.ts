@@ -34,6 +34,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { CargaImagenComponent } from './componentes/carga-imagen/carga-imagen.component';
 import { AgregarTurnoComponent } from './componentes/agregar-turno/agregar-turno.component';
 import { CalendarioComponent } from './componentes/calendario/calendario.component';
+import { FiltrarProfesionalesPipe } from './pipes/filtrar-profesionales.pipe';
  
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { CalendarioComponent } from './componentes/calendario/calendario.compone
     CargaImagenComponent,
     AgregarTurnoComponent,
     CalendarioComponent,
+    FiltrarProfesionalesPipe,
   ],
   imports: [
     BrowserModule,
