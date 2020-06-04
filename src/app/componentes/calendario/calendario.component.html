@@ -13,8 +13,8 @@
     <div>
         <mat-form-field>
             <mat-label>Horarios disponibles</mat-label>
-            <mat-select [(ngModel)]="horarioSeleccionado">
-                <mat-option *ngFor="let horario of horarios" [value]="horario">{{horario}}
+            <mat-select (ngModelChange)="seCambioElHorario($event)" [(ngModel)]="horarioSeleccionado">
+                <mat-option *ngFor="let horario of horarios" [value]="horario">{{horario.hora}} : {{horario.minutos}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

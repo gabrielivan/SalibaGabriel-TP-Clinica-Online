@@ -224,4 +224,26 @@ export class FirebaseService {
 
   }
 
+  async guardarTurno(turno: Turno) {
+    let turnos = this.db.collection('turnos');
+    if (turno) {
+      turnos.add({
+        estado: turno.Estado,
+        fecha: turno.Fecha,
+        idPaciente: turno.IdPaciente,
+        idProfesional: turno.IdProfesional
+      })
+        .then(function (docRef) {
+          swal.fire({
+            title: 'EXISTO.',
+            text: 'Se registro su turno correctamente',
+            timer: 2000,
+            showCancelButton: false,
+            showConfirmButton: false,
+            icon: "success"
+          });
+        });
+    }
+  }
+  
 }

@@ -19,5 +19,5 @@
     </div>
     <app-calendario [profesional]="profesionalSeleccionado" (fechaElegida) = fechaElegida($event)></app-calendario>
 
-    <button mat-raised-button color="primary" (click)="crearTurno()">Crear Turno</button>
+    <button (click)="crearTurno()" type="button" class="btn btn-primary">Crear Turno</button>
 </div>

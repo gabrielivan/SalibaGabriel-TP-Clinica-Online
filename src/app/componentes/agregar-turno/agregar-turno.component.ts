@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FirebaseService } from '../../servicios/firebase.service';
 import { Profesional } from 'src/app/clases/profesional';
@@ -11,14 +11,16 @@ import { Turno, Estado } from 'src/app/clases/turno';
 })
 export class AgregarTurnoComponent implements OnInit {
 
-  date = new Date;
+  @Input() paciente: any;
+
+  fechaTurno = new Date;
   especialidades: any = [];
   especialidadSeleccionada: string = "";
   usuarios: any = [];
   turnos: any = [];
-  profesionales: Profesional[] = [];
-  profesionalSeleccionado: Profesional = null;
-  turnoElegido: Turno = new Turno(0, "", "", this.date, Estado.Pendiente);
+  profesionales: any[] = [];
+  profesionalSeleccionado: any = null;
+  turnoElegido: Turno = new Turno(0, "", "", this.fechaTurno, Estado.Pendiente);
   
   constructor(public firebaseService: FirebaseService) { }
 
@@ -38,11 +40,13 @@ export class AgregarTurnoComponent implements OnInit {
   }
 
   crearTurno(){
-    console.log("crear turno");
+    this.turnoElegido = new Turno(0, this.profesionalSeleccionado.uid, this.paciente.uid, this.fechaTurno, Estado.Pendiente);
+    console.log(this.turnoElegido);
+    this.firebaseService.guardarTurno(this.turnoElegido);
   }
 
   fechaElegida(fecha: Date){
-    console.log(fecha);
+    this.fechaTurno = fecha;
   }
 
 }
