@@ -7,6 +7,7 @@ import "firebase/firestore";
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Turno } from '../clases/turno';
+import { Horario } from '../clases/horario';
 
 @Injectable({
   providedIn: 'root'
@@ -205,8 +206,22 @@ export class FirebaseService {
     return rv;
   }
 
-  async guardarDisponibilidad(profesional: any, disponibilidad: any) {
-    //hacer add / update de propiedad(disponibilidad)
+  async guardarDisponibilidad(profesional: any, disponibilidad: Array<Horario>) {
+
+    var db = this.db;
+    let usuarios = this.db.collection('usuarios')
+    let activeRef = await usuarios
+      .where('uid', '==', profesional.uid)
+      .get();
+
+    var jsonDisponibilidad = JSON.stringify(disponibilidad);
+    //update
+    activeRef.docs.forEach(function (doc) {
+
+      db.collection("usuarios").doc(doc.id)
+        .update({ disponibilidad: jsonDisponibilidad });
+    });
+
   }
 
 }

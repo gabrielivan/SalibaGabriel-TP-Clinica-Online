@@ -24,13 +24,11 @@ export class AgregarDisponibilidadComponent implements OnInit {
   }
 
   agregarDisponibilidad(dia: string, hora: string){
-    var diaHorario = new Horario(0, dia, hora);
+    var diaHorario = new Horario(dia, hora);
     this.disponibilidadDelProfesional.push(diaHorario);
   }
 
   guardarDisponibilidad(){
-    console.log(this.profesional);
-    console.log(this.disponibilidadDelProfesional);
     this.firebaseService.guardarDisponibilidad(this.profesional, this.disponibilidadDelProfesional);
   }
 
