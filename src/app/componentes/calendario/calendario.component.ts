@@ -10,7 +10,9 @@ import { element } from 'protractor';
 export class CalendarioComponent implements OnInit {
 
   @Output() fechaElegida: EventEmitter<any> = new EventEmitter<any>();
-  @Input() profesional: any;
+  @Input() especialidad: any;
+  @Input() profesionales: any;
+  @Input() profesionalSeleccionado: any;
 
   date = new Date();
   fechaMinima = new Date();
@@ -18,7 +20,6 @@ export class CalendarioComponent implements OnInit {
   auxMesFechaMaxima: number = this.date.getMonth();
   auxYearFechaMaxima: number = this.date.getFullYear();
   fechaMaxima = new Date(this.auxYearFechaMaxima, this.auxMesFechaMaxima, this.auxDiaFechaMaxima);
-  
   fechaSeleccionada: Date = null;
   //horarios de lunes a viernes de 8hs a 19hs/sabados de 8hs a 14hs
   horarios = [
@@ -48,11 +49,77 @@ export class CalendarioComponent implements OnInit {
   horarioSeleccionado = { hora: 0, minutos: 0 };
 
   evitarDomingos = (d: Date): boolean => {
+    var diasHorariosDisponibles = (this.diponibilidades(this.profesionalSeleccionado, this.especialidad));
     var date = new Date(d);
     const day = date.getDay();
-    // Previene que se eliga un Domingo.
-    return day !== 6;
+    return this.filtrarDiasDelCalendario(day, diasHorariosDisponibles);
   };
+
+  filtrarDiasDelCalendario(day: number, diasHorariosDisponibles: any) {
+    var retorno = false;
+    switch (day) {
+      case 0: {
+        //Lunes 
+        diasHorariosDisponibles.forEach(element => {
+          if (element.Dia == "Lunes") {
+            retorno = true;
+          }
+        });
+        break;
+      }
+      case 1: {
+        //Martes
+        diasHorariosDisponibles.forEach(element => {
+          if (element.Dia == "Martes") {
+            retorno = true;
+          }
+        });
+        break;
+      }
+      case 2: {
+        //Miercoles
+        diasHorariosDisponibles.forEach(element => {
+          if (element.Dia == "Miercoles") {
+            retorno = true;
+          }
+        });
+        break;
+      }
+      case 3: {
+        //Jueves
+        diasHorariosDisponibles.forEach(element => {
+          if (element.Dia == "Jueves") {
+            retorno = true;
+          }
+        });
+        break;
+      }
+      case 4: {
+        //Viernes
+        diasHorariosDisponibles.forEach(element => {
+          if (element.Dia == "Viernes") {
+            retorno = true;
+          }
+        });
+        break;
+      }
+      case 5: {
+        //Sabado
+        diasHorariosDisponibles.forEach(element => {
+          if (element.Dia == "Sabado") {
+            retorno = true;
+          }
+        });
+        break;
+      }
+      case 6: {
+        //Domingo
+        retorno = false;
+        break;
+      }
+    }
+    return retorno;
+  }
 
   public async seCambioLaFecha(event: any) {
     this.date = new Date(this.fechaSeleccionada);
@@ -70,6 +137,38 @@ export class CalendarioComponent implements OnInit {
       this.date.setMinutes(event.minutos);
       this.fechaElegida.emit(this.date);
     }
+  }
+
+  diponibilidades(profesional: any, especialidad: any) {
+    var diasHorariosDisponibles = [];
+    var profesionales = JSON.parse(JSON.stringify(this.profesionales)); //FIX para que no tenga la referencia del original.
+
+    if (profesional != null) {
+      if (typeof profesional.disponibilidad == "string") {
+        profesional.disponibilidad = JSON.parse(profesional.disponibilidad);
+      }
+      diasHorariosDisponibles = profesional.disponibilidad;
+    }
+    else if (especialidad != null) {
+      profesionales.forEach(p => {
+        if (p.especialidades && p.especialidades.length > 0 && p.especialidades.includes(especialidad)) {
+          if (p.disponibilidad && p.disponibilidad.length > 0) {
+            if (typeof p.disponibilidad == "string") {
+              p.disponibilidad = JSON.parse(p.disponibilidad);
+            }
+            if (diasHorariosDisponibles.length > 0) {
+              p.disponibilidad.forEach(d => {
+                diasHorariosDisponibles.push(d);
+              });
+            }
+            else {
+              diasHorariosDisponibles = p.disponibilidad;
+            }
+          }
+        }
+      });
+    }
+    return diasHorariosDisponibles;
   }
 
   constructor() { }
