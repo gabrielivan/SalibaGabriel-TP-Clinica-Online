@@ -21,6 +21,8 @@ export class CalendarioComponent implements OnInit {
   auxYearFechaMaxima: number = this.date.getFullYear();
   fechaMaxima = new Date(this.auxYearFechaMaxima, this.auxMesFechaMaxima, this.auxDiaFechaMaxima);
   fechaSeleccionada: Date = null;
+  diasHorariosDisponibles: any = [];
+  filtros: any;
   //horarios de lunes a viernes de 8hs a 19hs/sabados de 8hs a 14hs
   horarios = [
     { hora: 8, minutos: 0 }
@@ -49,10 +51,10 @@ export class CalendarioComponent implements OnInit {
   horarioSeleccionado = { hora: 0, minutos: 0 };
 
   evitarDomingos = (d: Date): boolean => {
-    var diasHorariosDisponibles = (this.diponibilidades(this.profesionalSeleccionado, this.especialidad));
+    this.diasHorariosDisponibles = (this.diponibilidades(this.profesionalSeleccionado, this.especialidad));
     var date = new Date(d);
     const day = date.getDay();
-    return this.filtrarDiasDelCalendario(day, diasHorariosDisponibles);
+    return this.filtrarDiasDelCalendario(day, this.diasHorariosDisponibles);
   };
 
   filtrarDiasDelCalendario(day: number, diasHorariosDisponibles: any) {
@@ -126,6 +128,10 @@ export class CalendarioComponent implements OnInit {
     this.date.setDate(this.date.getDate() + 1);//Fix para que no tenga en cuenta el GMT
     this.date.setHours(this.horarioSeleccionado.hora);
     this.date.setMinutes(this.horarioSeleccionado.minutos);
+    this.filtros = {
+      fechaSeleccionada: this.date,
+      diasHorariosDisponibles: this.diasHorariosDisponibles
+    }
     if (this.horarioSeleccionado.hora != 0) {
       this.fechaElegida.emit(this.date);
     }

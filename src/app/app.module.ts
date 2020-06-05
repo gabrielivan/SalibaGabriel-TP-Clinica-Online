@@ -36,6 +36,7 @@ import { AgregarTurnoComponent } from './componentes/agregar-turno/agregar-turno
 import { CalendarioComponent } from './componentes/calendario/calendario.component';
 import { FiltrarProfesionalesPipe } from './pipes/filtrar-profesionales.pipe';
 import { AgregarDisponibilidadComponent } from './componentes/agregar-disponibilidad/agregar-disponibilidad.component';
+import { FiltrarHorariosPipe } from './pipes/filtrar-horarios.pipe';
  
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AgregarDisponibilidadComponent } from './componentes/agregar-disponibil
     CalendarioComponent,
     FiltrarProfesionalesPipe,
     AgregarDisponibilidadComponent,
+    FiltrarHorariosPipe,
   ],
   imports: [
     BrowserModule,
