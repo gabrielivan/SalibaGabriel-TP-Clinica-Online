@@ -14,6 +14,11 @@ export class CalendarioComponent implements OnInit {
 
   date = new Date();
   fechaMinima = new Date();
+  auxDiaFechaMaxima: number = this.date.getDate() + 15;
+  auxMesFechaMaxima: number = this.date.getMonth();
+  auxYearFechaMaxima: number = this.date.getFullYear();
+  fechaMaxima = new Date(this.auxYearFechaMaxima, this.auxMesFechaMaxima, this.auxDiaFechaMaxima);
+  
   fechaSeleccionada: Date = null;
   //horarios de lunes a viernes de 8hs a 19hs/sabados de 8hs a 14hs
   horarios = [
@@ -45,11 +50,11 @@ export class CalendarioComponent implements OnInit {
   evitarDomingos = (d: Date): boolean => {
     var date = new Date(d);
     const day = date.getDay();
-    // Previene que se eliga un Domingo
-    return day !== 0 && day !== 6;
+    // Previene que se eliga un Domingo.
+    return day !== 6;
   };
 
-  public async seCambioLaFecha(event) {
+  public async seCambioLaFecha(event: any) {
     this.date = new Date(this.fechaSeleccionada);
     this.date.setDate(this.date.getDate() + 1);//Fix para que no tenga en cuenta el GMT
     this.date.setHours(this.horarioSeleccionado.hora);

@@ -4,7 +4,7 @@
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Eliga el dia</mat-label>
-            <input matInput [matDatepickerFilter]="evitarDomingos" [min]="fechaMinima" [matDatepicker]="picker"
+            <input matInput [matDatepickerFilter]="evitarDomingos" [min]="fechaMinima" [max]="fechaMaxima" [matDatepicker]="picker"
                 placeholder="Eliga un día" [(ngModel)]="fechaSeleccionada" (dateChange)="seCambioLaFecha($event)">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
