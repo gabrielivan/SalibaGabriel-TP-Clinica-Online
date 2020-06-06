@@ -4,6 +4,7 @@ import { FirebaseService } from '../../servicios/firebase.service';
 import { Profesional } from 'src/app/clases/profesional';
 import { Turno, Estado } from 'src/app/clases/turno';
 import swal from 'sweetalert2';
+import { OverlayPositionBuilder } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-agregar-turno',
@@ -48,14 +49,8 @@ export class AgregarTurnoComponent implements OnInit {
         this.firebaseService.guardarTurno(this.turnoElegido);
       }
       else if (this.especialidadSeleccionada != "Sin especialidad") {
-        var profesional: any;
-        this.profesionales.forEach(p => {
-          if (p.especialidades && p.especialidades.length > 0 && p.especialidades.includes(this.especialidadSeleccionada)) {
-            profesional = p;
-          }
-        })
-        this.turnoElegido = new Turno(0, profesional.uid, this.paciente.uid, this.fechaTurno, Estado.Pendiente);
-        console.log(this.turnoElegido);
+        var profesionales = this.traerProfesionalesDisponibles();
+        this.turnoElegido = new Turno(0, profesionales[0].uid, this.paciente.uid, this.fechaTurno, Estado.Pendiente);
         this.firebaseService.guardarTurno(this.turnoElegido);
       }
       else {
@@ -83,6 +78,90 @@ export class AgregarTurnoComponent implements OnInit {
 
   fechaElegida(fecha: Date) {
     this.fechaTurno = fecha;
+  }
+
+  traerProfesionalesDisponibles() {
+    var retorno = [];
+    this.profesionales.forEach(profesional => {
+      if (profesional.especialidades && profesional.especialidades.length > 0 && profesional.especialidades.includes(this.especialidadSeleccionada)) {
+        //profesionales que atienden para esa especialidad
+        var auxDia = this.fechaTurno.getDay() - 1;
+        var dia = this.conversorDia(auxDia);
+        var hora = this.fechaTurno.getHours();
+        var isValid = false;
+
+        if(typeof profesional.disponibilidad == "string"){
+          profesional.disponibilidad = JSON.parse(profesional.disponibilidad);
+        }
+
+        //filtro por disponibilidad del profesional
+        profesional.disponibilidad.forEach(d => {
+          if (d.Dia == dia && d.Hora == hora.toString()) {
+            //joya, un profesional atiende el dia seleccionado y la current hora a priori
+            isValid = true;
+          }
+        });
+
+        if (isValid) {
+          //filtro por turnos ocupados
+          var profesionalEstaDisponible = true;
+          this.turnos.forEach(turno => {//recorro turno por turno
+            if (turno.estado == Estado.Aceptado || turno.estado == Estado.Pendiente) {
+              if (turno.idProfesional == profesional.uid) {
+                if (turno.fecha == this.fechaTurno) {
+                  var profesionalEstaDisponible = false;
+                }
+              }
+            }
+          });
+          if (profesionalEstaDisponible) {
+            retorno.push(profesional);
+          }
+        }
+      }
+    });
+    return retorno;
+  }
+
+  conversorDia(dia: number) {
+    var retorno: string = "";
+    switch (dia) {
+      case 0: {
+        //Lunes
+        retorno = "Lunes";
+        break;
+      }
+      case 1: {
+        //Martes
+        retorno = "Martes";
+        break;
+      }
+      case 2: {
+        //Miercoles
+        retorno = "Miercoles";
+        break;
+      }
+      case 3: {
+        //Jueves
+        retorno = "Jueves";
+        break;
+      }
+      case 4: {
+        //Viernes
+        retorno = "Viernes";
+        break;
+      }
+      case 5: {
+        //Sabado
+        retorno = "Sabado";
+        break;
+      }
+      case 6: {
+        //Domingo
+        retorno = "Domingo";
+      }
+    }
+    return retorno;
   }
 
 }
