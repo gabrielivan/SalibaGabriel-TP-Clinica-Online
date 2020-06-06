@@ -1,15 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FirebaseService } from '../../servicios/firebase.service';
+import { Paciente } from 'src/app/clases/paciente';
 
 @Component({
   selector: 'app-turnos',
   templateUrl: './turnos.component.html',
   styleUrls: ['./turnos.component.css']
 })
+
 export class TurnosComponent implements OnInit {
+  paciente: any;
+  turnos: any = [];
+  resena: string = "";
 
-  constructor() { }
+  constructor(public firebaseService: FirebaseService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.delay(3000);
+    var authCurrentUser = await this.firebaseService.getAuthCurrentUser();
+    this.paciente = await this.firebaseService.getUser(authCurrentUser.uid);
+    this.turnos = await this.firebaseService.getShifts();
+    if (this.turnos != null && this.paciente != null) {
+      var paciente = this.paciente;
+      this.turnos = this.turnos.filter(function (x) {
+        return x.idPaciente == paciente.uid;
+      })
+    }
   }
 
+  public delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  verResena(turno: any){
+    this.resena = turno.resena;
+  }
 }
