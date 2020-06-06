@@ -13,7 +13,6 @@ import { PrincipalComponent } from './componentes/principal/principal.component'
 import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
-import { CartillaComponent } from './componentes/cartilla/cartilla.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -44,7 +43,6 @@ import { FiltrarHorariosPipe } from './pipes/filtrar-horarios.pipe';
     HomeComponent,
     PrincipalComponent,
     TurnosComponent,
-    CartillaComponent,
     LoginComponent,
     RegisterComponent,
     CargaImagenComponent,
