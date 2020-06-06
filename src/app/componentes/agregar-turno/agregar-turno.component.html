@@ -17,7 +17,7 @@
             </mat-select>
           </mat-form-field>
     </div>
-    <app-calendario [profesionales]="profesionales" [profesionalSeleccionado]="profesionalSeleccionado" [especialidad]="especialidadSeleccionada" (fechaElegida) = fechaElegida($event)></app-calendario>
+    <app-calendario [turnos]="turnos" [profesionales]="profesionales" [profesionalSeleccionado]="profesionalSeleccionado" [especialidad]="especialidadSeleccionada" (fechaElegida) = fechaElegida($event)></app-calendario>
 
     <button (click)="crearTurno()" type="button" class="btn btn-primary">Crear Turno</button>
 </div>

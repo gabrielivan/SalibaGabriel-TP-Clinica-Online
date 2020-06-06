@@ -12,6 +12,7 @@ export class CalendarioComponent implements OnInit {
   @Output() fechaElegida: EventEmitter<any> = new EventEmitter<any>();
   @Input() especialidad: any;
   @Input() profesionales: any;
+  @Input() turnos: any;
   @Input() profesionalSeleccionado: any;
 
   date = new Date();
@@ -130,7 +131,8 @@ export class CalendarioComponent implements OnInit {
     this.date.setMinutes(this.horarioSeleccionado.minutos);
     this.filtros = {
       fechaSeleccionada: this.date,
-      diasHorariosDisponibles: this.diasHorariosDisponibles
+      diasHorariosDisponibles: this.diasHorariosDisponibles,
+      turnos: this.turnos
     }
     if (this.horarioSeleccionado.hora != 0) {
       this.fechaElegida.emit(this.date);
