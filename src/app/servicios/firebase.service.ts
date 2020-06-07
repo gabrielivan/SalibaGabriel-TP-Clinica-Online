@@ -281,8 +281,10 @@ export class FirebaseService {
     //update
     activeRef.docs.forEach(function (doc) {
       db.collection("turnos").doc(doc.id)
-        .update({ resena: turno.resena,
-                  estado: turno.estado });
+        .update({
+          resena: turno.resena,
+          estado: turno.estado
+        });
       swal.fire({
         title: 'EXISTO.',
         text: 'Su reseña fue registrada correctamente',
@@ -292,6 +294,36 @@ export class FirebaseService {
         icon: "success"
       });
     });
+  }
+
+  async guardarEstados(turnos: any[]) {
+    var db = this.db;
+    turnos.forEach(async turno => {
+      let usuarios = this.db.collection('turnos')
+      let activeRef = await usuarios
+        .where('fecha', '==', turno.fecha)
+        .where('idProfesional', '==', turno.idProfesional)
+        .where('idPaciente', '==', turno.idPaciente)
+        .get();
+
+      //update
+      activeRef.docs.forEach(function (doc) {
+        db.collection("turnos").doc(doc.id)
+          .update({
+            estado: turno.estado
+          });
+      });
+      swal.fire({
+        title: 'EXISTO.',
+        text: 'Se guardaron sus cambios correctamente',
+        timer: 2000,
+        showCancelButton: false,
+        showConfirmButton: false,
+        icon: "success"
+      });
+    });
+
+
   }
 
 

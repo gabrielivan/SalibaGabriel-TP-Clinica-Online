@@ -48,11 +48,21 @@ export class TurnosComponent implements OnInit {
   }
 
   cancelarTurno(turno: any){
-    if(turno.estado != "3" && turno.estado != "4"){
+    if(turno.estado != "3" && turno.estado != "4" && turno.estado != "5"){
       turno.estado = "3";
     }
     else if(turno.estado == "3"){
       turno.estado = "1";
     }
+  }
+
+  guardarEstados(){
+    var turnos = [];
+    this.turnos.forEach(turno => {
+      if(turno.estado == "3"){
+        turnos.push(turno);
+      }
+    });
+    this.firebaseService.guardarEstados(turnos);
   }
 }

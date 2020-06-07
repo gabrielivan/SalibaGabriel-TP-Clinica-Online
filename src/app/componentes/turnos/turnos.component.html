@@ -18,6 +18,7 @@
         <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-primary">Aceptado</button></td>
         <td *ngIf="turno.estado == 3"> <button type="button" class="btn btn-danger">Cancelado</button></td>
         <td *ngIf="turno.estado == 4"> <button type="button" class="btn btn-success">Terminado</button></td>
+        <td *ngIf="turno.estado == 5"> <button type="button" class="btn btn-dark">Rechazado</button></td>
 
         <td *ngIf="turno.resena != ''"> <button (click)="verResena(turno)" type="button" class="btn btn-info">Reseña</button></td>
         <td *ngIf="turno.resena == ''"> <button type="button" class="btn btn-danger">Sin Reseña</button></td>
@@ -32,6 +33,8 @@
       </tr>
     </tbody>
   </table>
+  <button (click)="guardarEstados()" type="button"
+            class="btn btn-info">Guardar los cambios</button>
 </div>
 <div class="container" *ngIf="resena != ''">
   <div class="form-group">
