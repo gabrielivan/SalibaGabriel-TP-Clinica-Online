@@ -67,4 +67,8 @@ export class TurnosProfesionalComponent implements OnInit {
     this.firebaseService.guardarResena(turno);
   }
 
+  guardarEstados(){
+    this.firebaseService.guardarEstados(this.turnos);
+  }
+
 }
