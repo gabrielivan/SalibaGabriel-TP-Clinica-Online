@@ -245,5 +245,28 @@ export class FirebaseService {
         });
     }
   }
-  
+
+  async guardarEncuesta(turno: any) {
+    var db = this.db;
+    let usuarios = this.db.collection('turnos')
+    let activeRef = await usuarios
+      .where('fecha', '==', turno.fecha)
+      .get();
+
+    var jsonEncuesta = JSON.stringify(turno.encuesta);
+    //update
+    activeRef.docs.forEach(function (doc) {
+      db.collection("turnos").doc(doc.id)
+        .update({ encuesta: jsonEncuesta });
+      swal.fire({
+        title: 'EXISTO.',
+        text: 'Su encuesta fue registrada correctamente',
+        timer: 2000,
+        showCancelButton: false,
+        showConfirmButton: false,
+        icon: "success"
+      });
+    });
+  }
+
 }

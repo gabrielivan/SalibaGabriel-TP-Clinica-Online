@@ -15,16 +15,17 @@
         <td>{{turno.fecha}}</td>
         
         <td *ngIf="turno.estado == 1"> <button type="button" class="btn btn-warning">Pendiente</button></td>
-        <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-success">Aceptado</button></td>
+        <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-primary">Aceptado</button></td>
         <td *ngIf="turno.estado == 3"> <button type="button" class="btn btn-danger">Cancelado</button></td>
+        <td *ngIf="turno.estado == 4"> <button type="button" class="btn btn-success">Terminado</button></td>
 
-        <td *ngIf="turno.resena"> <button (click)="verResena(turno)" type="button" class="btn btn-info">Reseña</button></td>
-        <td *ngIf="!turno.resena"> <button type="button" class="btn btn-danger">Sin Reseña</button></td>
+        <td *ngIf="turno.resena != ''"> <button (click)="verResena(turno)" type="button" class="btn btn-info">Reseña</button></td>
+        <td *ngIf="turno.resena == ''"> <button type="button" class="btn btn-danger">Sin Reseña</button></td>
 
-        <td *ngIf="!turno.encuesta && turno.resena"> <button (click)="completarEncuesta(turno)" type="button"
+        <td *ngIf="!turno.encuesta && turno.resena != ''"> <button (click)="completarEncuesta(turno)" type="button"
             class="btn btn-dark">Completar encuesta</button></td>
-        <td *ngIf="turno.encuesta && turno.resena"> <button type="button" class="btn btn-success">Ya se completo una encuesta</button></td>
-        <td *ngIf="!turno.encuesta && !turno.resena"> <button type="button" class="btn btn-danger">No se puede completar</button></td>
+        <td *ngIf="turno.encuesta && turno.resena != ''"> <button type="button" class="btn btn-success">Ya se completo una encuesta</button></td>
+        <td *ngIf="!turno.encuesta && turno.resena == ''"> <button type="button" class="btn btn-danger">No se puede completar</button></td>
         <td>
           <mat-checkbox (click)="turno.estado = '3'"></mat-checkbox>
         </td>

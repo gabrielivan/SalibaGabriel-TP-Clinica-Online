@@ -14,8 +14,6 @@ export class Turno {
         this.IdPaciente = idPaciente;
         this.Fecha = fecha;
         this.Estado = estado;
-        this.Resena = "";
-        this.Encuesta = "";
     }
     
 }
@@ -23,5 +21,6 @@ export class Turno {
  export enum Estado {
     Pendiente = "1",
     Aceptado = "2",
-    Cancelado = "3"
+    Cancelado = "3",
+    Terminado = "4"
   }

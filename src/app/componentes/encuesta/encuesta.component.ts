@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Encuesta } from '../../clases/encuesta';
+import { FirebaseService } from '../../servicios/firebase.service';
 
 @Component({
   selector: 'app-encuesta',
@@ -14,14 +15,14 @@ export class EncuestaComponent implements OnInit {
 
   frecuencias = ["Menos de 5 dias", "Mas de 5 dias", "Mas de 10 dias"];
 
-  constructor() { }
+  constructor(public firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
   }
 
   guardarEncuesta() {
     this.turno.encuesta = this.encuesta;
-    //updatear en firebase el turno
+    this.firebaseService.guardarEncuesta(this.turno);
     this.encuestaCompletada.emit(false);
   }
 }
