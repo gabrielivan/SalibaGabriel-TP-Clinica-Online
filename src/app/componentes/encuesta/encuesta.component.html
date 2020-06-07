@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Encuesta</mat-card-title>
+        <mat-card-subtitle>Ingrese los datos requeridos</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="cardContent">
+        <div class="inputContent">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su nombre</mat-label>
+                <input matInput placeholder="nombre" [(ngModel)]="encuesta.Nombre">
+            </mat-form-field>
+        </div>
+        <div class="inputContent">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su apellido</mat-label>
+                <input matInput placeholder="apellido" [(ngModel)]="encuesta.Apellido">
+            </mat-form-field>
+        </div>
+        <div class="inputContent">
+            <mat-label>Ingrese un nivel de satisfaccion del 1 al 10</mat-label>
+            <br />
+            <mat-slider [(ngModel)]="encuesta.NivelSatisfaccion" thumbLabel tickInterval="1" min="1" max="10">
+            </mat-slider>
+        </div>
+        <div class="inputContent">
+            <mat-form-field>
+                <mat-label>¿Cuantas veces se ha atendido en los ultimos 15 dias?</mat-label>
+                <mat-select [(ngModel)]="encuesta.Frecuencia">
+                    <mat-option *ngFor="let frecuencia of frecuencias" [value]="frecuencia">
+                        {{frecuencia}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="inputContent">
+            <mat-label>¿Primera vez que se atiende con el profesional?</mat-label>
+            <br />
+            <br />
+            <mat-slide-toggle [(ngModel)]="encuesta.PrimeraVezAtendido"> NO/SI </mat-slide-toggle>
+        </div>
+        <br />
+        <div class="inputContent">
+            <mat-label>¿Se volveria a atender?</mat-label>
+            <br />
+            <br />
+            <mat-checkbox [(ngModel)]="encuesta.VolverseAtender">Si</mat-checkbox>
+            <br />
+            <mat-checkbox [(ngModel)]="!encuesta.VolverseAtender">No</mat-checkbox>
+        </div>
+        <div class="inputContent">
+            <mat-label>¿Como supo de nosotros?</mat-label>
+            <div class="form-group">
+                <textarea class="form-control" rows="5" [(ngModel)]="encuesta.ComoConocio"></textarea>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="guardarEncuesta()" style="width: 75%;" mat-button>Mandar encuesta</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,33 +1,43 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<div class="container">         
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Estado</th>
-          <th>Reseña</th>
-          <th>Encuesta</th>
-          <th>Cancelar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let turno of turnos">
-          <td>{{turno.fecha}}</td>
-          <td *ngIf="turno.estado == 1"> <button type="button" class="btn btn-warning">Pendiente</button></td>
-          <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-success">Aceptado</button></td>
-          <td *ngIf="turno.estado == 3"> <button type="button" class="btn btn-danger">Cancelado</button></td>
-          <td *ngIf="turno.resena"> <button (click)="verResena(turno)" type="button" class="btn btn-info">Reseña</button></td>
-          <td *ngIf="!turno.resena"> <button type="button" class="btn btn-danger">Sin Reseña</button></td>
-          <!-- <td *ngIf="!turno.encuesta"> <button type="button" class="btn btn-dark" routerLink="/encuesta">Completar encuesta</button></td> -->
-          <td><mat-checkbox (click)="turno.estado = '3'"></mat-checkbox></td>
-        </tr>
-      </tbody>
-    </table>
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Reseña</th>
+        <th>Encuesta</th>
+        <th>Cancelar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turno of turnos">
+        <td>{{turno.fecha}}</td>
+        
+        <td *ngIf="turno.estado == 1"> <button type="button" class="btn btn-warning">Pendiente</button></td>
+        <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-success">Aceptado</button></td>
+        <td *ngIf="turno.estado == 3"> <button type="button" class="btn btn-danger">Cancelado</button></td>
+
+        <td *ngIf="turno.resena"> <button (click)="verResena(turno)" type="button" class="btn btn-info">Reseña</button></td>
+        <td *ngIf="!turno.resena"> <button type="button" class="btn btn-danger">Sin Reseña</button></td>
+
+        <td *ngIf="!turno.encuesta && turno.resena"> <button (click)="completarEncuesta(turno)" type="button"
+            class="btn btn-dark">Completar encuesta</button></td>
+        <td *ngIf="turno.encuesta && turno.resena"> <button type="button" class="btn btn-success">Ya se completo una encuesta</button></td>
+        <td *ngIf="!turno.encuesta && !turno.resena"> <button type="button" class="btn btn-danger">No se puede completar</button></td>
+        <td>
+          <mat-checkbox (click)="turno.estado = '3'"></mat-checkbox>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container" *ngIf="resena != ''">
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Reseña</label>
+    <textarea [(ngModel)]="resena" class="form-control" rows="6" disabled></textarea>
   </div>
-  <div class="container" *ngIf="resena != ''">
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Reseña</label>
-      <textarea [(ngModel)]="resena" class="form-control" rows="6" disabled></textarea>
-    </div>
-  </div>
-  
+</div>
+<div class="container" *ngIf="encuestaComponente">
+  <app-encuesta [turno]="turnoParaEncuesta" (encuestaCompletada) = seCompletoLaEncuesta($event)></app-encuesta>
+</div>

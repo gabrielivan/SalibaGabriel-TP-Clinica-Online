@@ -12,6 +12,8 @@ export class TurnosComponent implements OnInit {
   paciente: any;
   turnos: any = [];
   resena: string = "";
+  encuestaComponente = false;
+  turnoParaEncuesta: any = null;
 
   constructor(public firebaseService: FirebaseService) { }
 
@@ -34,5 +36,14 @@ export class TurnosComponent implements OnInit {
 
   verResena(turno: any){
     this.resena = turno.resena;
+  }
+
+  completarEncuesta(turno: any){
+    this.turnoParaEncuesta = turno;
+    this.encuestaComponente = true;
+  }
+
+  seCompletoLaEncuesta(event){
+    this.encuestaComponente = event;
   }
 }
