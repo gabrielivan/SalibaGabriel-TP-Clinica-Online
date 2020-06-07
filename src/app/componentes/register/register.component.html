@@ -86,8 +86,7 @@
             <app-carga-imagen (imageUrl)=onImage2Upload($event) *ngIf="esPaciente()"></app-carga-imagen>
         </mat-card-content>
         <mat-card-actions>
-            <recaptcha [formControl]="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()">
-            </recaptcha>
+            <re-captcha (resolved)="resolved($event)" siteKey="6LcUOgEVAAAAAJreAYtu23fI8rFuFe2_z4PMa6N9"></re-captcha>
             <br/>
             <button (click)="register()" style="width: 75%;" mat-button>Registrarse</button>
         </mat-card-actions>

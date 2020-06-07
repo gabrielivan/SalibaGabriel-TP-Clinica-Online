@@ -21,7 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { RecaptchaModule } from "angular-google-recaptcha"
+import { RecaptchaModule } from 'ng-recaptcha';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -77,10 +77,8 @@ import { TurnosProfesionalComponent } from './componentes/turnos-profesional/tur
     MatRadioModule,
     MatSlideToggleModule,
     MatDatepickerModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    RecaptchaModule.forRoot({
-      siteKey: '6LcUOgEVAAAAAJreAYtu23fI8rFuFe2_z4PMa6N9',
-    }),
+    RecaptchaModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
