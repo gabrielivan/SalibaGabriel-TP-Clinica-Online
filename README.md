@@ -6,7 +6,7 @@ Ademas puede reservar turnos y recibir la reseña del profesional, luego de que 
 
 ### Perfiles
 
-_Consta de: 
+Consta de: 
 Paciente, Profesional y Administrador.
 
 ```
