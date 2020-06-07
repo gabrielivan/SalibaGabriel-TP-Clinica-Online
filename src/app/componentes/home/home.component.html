@@ -1,6 +1,7 @@
 <mat-tab-group>
     <mat-tab label="Principal"> <app-principal></app-principal> </mat-tab>
-    <mat-tab label="Mis Turnos"> <app-turnos></app-turnos> </mat-tab>
+    <mat-tab *ngIf="esPaciente()" label="Mis Turnos"> <app-turnos></app-turnos> </mat-tab>
+    <mat-tab *ngIf="esProfesional()" label="Mis Turnos"> <app-turnos-profesional></app-turnos-profesional> </mat-tab>
     <mat-tab label="Acerca de Nosotros"> Acerca de Nosotros </mat-tab>
     <mat-tab *ngIf="esAdministrador()" label="Crear Administrador"> <app-register></app-register> </mat-tab>
     <mat-tab *ngIf="esPaciente()" label="Pedir Turno"> <app-agregar-turno [paciente]="currentUser"></app-agregar-turno> </mat-tab>

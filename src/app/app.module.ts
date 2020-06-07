@@ -19,6 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -39,6 +40,7 @@ import { FiltrarProfesionalesPipe } from './pipes/filtrar-profesionales.pipe';
 import { AgregarDisponibilidadComponent } from './componentes/agregar-disponibilidad/agregar-disponibilidad.component';
 import { FiltrarHorariosPipe } from './pipes/filtrar-horarios.pipe';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
+import { TurnosProfesionalComponent } from './componentes/turnos-profesional/turnos-profesional.component';
  
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
     AgregarDisponibilidadComponent,
     FiltrarHorariosPipe,
     EncuestaComponent,
+    TurnosProfesionalComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatSlideToggleModule,
     MatDatepickerModule,
     AngularFireModule.initializeApp(firebaseConfig),

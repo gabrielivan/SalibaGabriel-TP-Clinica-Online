@@ -22,5 +22,6 @@ export class Turno {
     Pendiente = "1",
     Aceptado = "2",
     Cancelado = "3",
-    Terminado = "4"
+    Terminado = "4",
+    Rechazado = "5"
   }

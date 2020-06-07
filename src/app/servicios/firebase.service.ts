@@ -251,6 +251,7 @@ export class FirebaseService {
     let usuarios = this.db.collection('turnos')
     let activeRef = await usuarios
       .where('fecha', '==', turno.fecha)
+      .where('idPaciente', '==', turno.idPaciente)
       .get();
 
     var jsonEncuesta = JSON.stringify(turno.encuesta);
@@ -268,5 +269,30 @@ export class FirebaseService {
       });
     });
   }
+
+  async guardarResena(turno: any) {
+    var db = this.db;
+    let usuarios = this.db.collection('turnos')
+    let activeRef = await usuarios
+      .where('fecha', '==', turno.fecha)
+      .where('idProfesional', '==', turno.idProfesional)
+      .get();
+
+    //update
+    activeRef.docs.forEach(function (doc) {
+      db.collection("turnos").doc(doc.id)
+        .update({ resena: turno.resena,
+                  estado: turno.estado });
+      swal.fire({
+        title: 'EXISTO.',
+        text: 'Su reseña fue registrada correctamente',
+        timer: 2000,
+        showCancelButton: false,
+        showConfirmButton: false,
+        icon: "success"
+      });
+    });
+  }
+
 
 }
