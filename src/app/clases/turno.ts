@@ -5,6 +5,8 @@ export class Turno {
     IdPaciente: string;
     Estado: Estado;
     Fecha: Date;
+    Resena: string;
+    Encuesta: string;
 
     public constructor(id: number, idProfesional: string, idPaciente: string, fecha: Date, estado: Estado) { 
         this.Id = id;
@@ -12,6 +14,8 @@ export class Turno {
         this.IdPaciente = idPaciente;
         this.Fecha = fecha;
         this.Estado = estado;
+        this.Resena = "";
+        this.Encuesta = "";
     }
     
 }
