@@ -23,6 +23,16 @@ export class RegisterComponent implements OnInit {
   constructor(public firebaseService: FirebaseService) {
   }
 
+  onScriptLoad() {
+    console.log('Google reCAPTCHA loaded and is ready for use!')
+  }
+
+  onScriptError() {
+    console.log('Something went long when loading the Google reCAPTCHA')
+  }
+
+  myRecaptcha = new FormControl(false);
+
   async ngOnInit() {
     this.especialidades = await this.firebaseService.getEspecialidades();
     await this.delay(3000);

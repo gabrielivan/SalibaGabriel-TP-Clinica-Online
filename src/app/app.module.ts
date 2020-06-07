@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
- 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,29 +8,30 @@ import { HomeComponent } from './componentes/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { RecaptchaModule } from "angular-google-recaptcha"
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentUtcDateAdapter } from './moment-utc-date-adapter';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import{firebaseConfig}from '../environments/environment'
-    // Initialize Cloud Firestore through Firebase
-    firebase.initializeApp(firebaseConfig);
+import { firebaseConfig } from '../environments/environment'
+// Initialize Cloud Firestore through Firebase
+firebase.initializeApp(firebaseConfig);
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { CargaImagenComponent } from './componentes/carga-imagen/carga-imagen.component';
@@ -41,7 +42,7 @@ import { AgregarDisponibilidadComponent } from './componentes/agregar-disponibil
 import { FiltrarHorariosPipe } from './pipes/filtrar-horarios.pipe';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { TurnosProfesionalComponent } from './componentes/turnos-profesional/turnos-profesional.component';
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +78,9 @@ import { TurnosProfesionalComponent } from './componentes/turnos-profesional/tur
     MatSlideToggleModule,
     MatDatepickerModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    RecaptchaModule.forRoot({
+      siteKey: '6LcUOgEVAAAAAJreAYtu23fI8rFuFe2_z4PMa6N9',
+    }),
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },

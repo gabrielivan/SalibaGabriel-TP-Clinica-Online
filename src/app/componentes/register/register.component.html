@@ -31,13 +31,14 @@
                         <mat-option value="Femenino">
                             Femenino
                         </mat-option>
-                      </mat-select>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <div class="inputContent">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su fecha de nacimiento</mat-label>
-                    <input type="date" matInput placeholder="dd/mm/yyyy" [(ngModel)]="usuario.FechaDeNacimiento" required>
+                    <input type="date" matInput placeholder="dd/mm/yyyy" [(ngModel)]="usuario.FechaDeNacimiento"
+                        required>
                 </mat-form-field>
             </div>
             <div class="inputContent">
@@ -59,9 +60,10 @@
                 <mat-form-field>
                     <mat-label>Especialidades</mat-label>
                     <mat-select [(ngModel)]="especialidadesSeleccionadas" multiple>
-                      <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad">{{especialidad}}</mat-option>
+                        <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad">{{especialidad}}
+                        </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
             </div>
             <div *ngIf="!esAdministrador()" class="inputContent">
                 <mat-form-field>
@@ -80,10 +82,13 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <app-carga-imagen (imageUrl) = onImageUpload($event)></app-carga-imagen>
-            <app-carga-imagen (imageUrl) = onImage2Upload($event) *ngIf="esPaciente()"></app-carga-imagen>
+            <app-carga-imagen (imageUrl)=onImageUpload($event)></app-carga-imagen>
+            <app-carga-imagen (imageUrl)=onImage2Upload($event) *ngIf="esPaciente()"></app-carga-imagen>
         </mat-card-content>
         <mat-card-actions>
+            <recaptcha [formControl]="myRecaptcha" (scriptLoad)="onScriptLoad()" (scriptError)="onScriptError()">
+            </recaptcha>
+            <br/>
             <button (click)="register()" style="width: 75%;" mat-button>Registrarse</button>
         </mat-card-actions>
     </mat-card>
