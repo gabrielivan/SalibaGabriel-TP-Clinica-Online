@@ -46,4 +46,13 @@ export class TurnosComponent implements OnInit {
   seCompletoLaEncuesta(event){
     this.encuestaComponente = event;
   }
+
+  cancelarTurno(turno: any){
+    if(turno.estado != "3" && turno.estado != "4"){
+      turno.estado = "3";
+    }
+    else if(turno.estado == "3"){
+      turno.estado = "1";
+    }
+  }
 }

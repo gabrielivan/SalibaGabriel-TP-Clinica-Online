@@ -27,7 +27,7 @@
         <td *ngIf="turno.encuesta && turno.resena != ''"> <button type="button" class="btn btn-success">Ya se completo una encuesta</button></td>
         <td *ngIf="!turno.encuesta && turno.resena == ''"> <button type="button" class="btn btn-danger">No se puede completar</button></td>
         <td>
-          <mat-checkbox (click)="turno.estado = '3'"></mat-checkbox>
+          <mat-checkbox (click)="cancelarTurno(turno)"></mat-checkbox>
         </td>
       </tr>
     </tbody>
