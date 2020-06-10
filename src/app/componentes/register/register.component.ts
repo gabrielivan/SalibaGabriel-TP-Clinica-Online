@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   captchaOkey = false;
 
   resolved(captchaResponse: string) {
-    if (captchaResponse.length > 0) {
+    if (captchaResponse && captchaResponse.length > 0) {
       this.captchaOkey = true;
     }
     console.log(`Resolved captcha with response: ${captchaResponse}`);
