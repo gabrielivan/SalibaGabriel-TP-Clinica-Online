@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.firebaseService.login(this.usuario,this.clave, );
+    this.firebaseService.login(this.usuario, this.clave);
   }
 
 }

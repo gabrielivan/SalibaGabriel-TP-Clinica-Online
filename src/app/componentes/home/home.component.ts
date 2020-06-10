@@ -16,8 +16,10 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     await this.delay(3000);
     var authCurrentUser = await this.firebaseService.getAuthCurrentUser();
-    this.currentUser = await this.firebaseService.getUser(authCurrentUser.uid);
-    console.log(this.currentUser);
+    if (authCurrentUser) {
+      this.currentUser = await this.firebaseService.getUser(authCurrentUser.uid);
+      console.log(this.currentUser);
+    }
   }
 
   public delay(ms: number) {

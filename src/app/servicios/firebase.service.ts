@@ -98,6 +98,8 @@ export class FirebaseService {
         console.log(credential);
         dbRef.collection("usuarios")
           .where("uid", "==", credential.user.uid)
+          .where("isDeleted", "==", 0)
+          .where("isValidated", "==", 1)
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -115,7 +117,6 @@ export class FirebaseService {
                   localStorage.setItem('token', token);
                   router.navigate(['/']);
                 });
-
             });
           });
       })
@@ -299,8 +300,8 @@ export class FirebaseService {
   async guardarEstados(turnos: any[]) {
     var db = this.db;
     turnos.forEach(async turno => {
-      let usuarios = this.db.collection('turnos')
-      let activeRef = await usuarios
+      let turnos = this.db.collection('turnos')
+      let activeRef = await turnos
         .where('fecha', '==', turno.fecha)
         .where('idProfesional', '==', turno.idProfesional)
         .where('idPaciente', '==', turno.idPaciente)
@@ -322,8 +323,33 @@ export class FirebaseService {
         icon: "success"
       });
     });
+  }
 
+  async guardarBorradoValidado(usuarios: any[]) {
+    var db = this.db;
+    usuarios.forEach(async usuario => {
+      let usuarios = this.db.collection('usuarios')
+      let activeRef = await usuarios
+        .where('uid', '==', usuario.uid)
+        .get();
 
+      //update
+      activeRef.docs.forEach(function (doc) {
+        db.collection("usuarios").doc(doc.id)
+          .update({
+            isDeleted: usuario.isDeleted,
+            isValidated: usuario.isValidated
+          });
+      });
+      swal.fire({
+        title: 'EXITO.',
+        text: 'Se guardaron sus cambios correctamente',
+        timer: 2000,
+        showCancelButton: false,
+        showConfirmButton: false,
+        icon: "success"
+      });
+    });
   }
 
 

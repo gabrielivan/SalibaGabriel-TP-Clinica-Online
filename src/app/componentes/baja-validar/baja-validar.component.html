@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Validar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios">
+                <td>{{usuario.apellido}}</td>
+                <td>{{usuario.email}}</td>
+
+                <td *ngIf="usuario.tipo == '1'"> <button type="button" class="btn btn-success">Paciente</button></td>
+                <td *ngIf="usuario.tipo == '2'"> <button type="button" class="btn btn-primary">Profesional</button></td>
+                <td *ngIf="usuario.tipo == '3'"> <button type="button" class="btn btn-info">Administrador</button></td>
+
+                <td *ngIf="usuario.tipo == '1' || usuario.tipo == '3'">
+                    <mat-checkbox [disabled]="true"></mat-checkbox>
+                </td>
+                <td *ngIf="usuario.tipo == '2' && usuario.isValidated == 0">
+                    <mat-checkbox (click)="validarProfesional(usuario)"></mat-checkbox>
+                </td>
+                <td *ngIf="usuario.tipo == '2' && usuario.isValidated == 1">
+                    <mat-checkbox [checked]="true"></mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (click)="borrarUsuario(usuario)"></mat-checkbox>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button (click)="guardarCambios()" type="button" class="btn btn-info">Guardar los cambios</button>
+</div>
