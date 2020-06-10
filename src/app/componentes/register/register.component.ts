@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FirebaseService } from '../../servicios/firebase.service';
 import { Usuario, TipoDeUsuario } from 'src/app/clases/usuario';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -19,9 +20,21 @@ export class RegisterComponent implements OnInit {
   especialidadesSeleccionadas: string[] = null;
   fotoDos = "";
   clave = "";
+  captchaOkey = false;
 
   resolved(captchaResponse: string) {
+    if (captchaResponse.length > 0) {
+      this.captchaOkey = true;
+    }
     console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
+  onScriptLoad() {
+    console.log('Google reCAPTCHA loaded and is ready for use!');
+  }
+
+  onScriptError() {
+    console.log('Something went long when loading the Google reCAPTCHA')
   }
 
   constructor(public firebaseService: FirebaseService) {
@@ -31,8 +44,10 @@ export class RegisterComponent implements OnInit {
     this.especialidades = await this.firebaseService.getEspecialidades();
     await this.delay(3000);
     var authCurrentUser = await this.firebaseService.getAuthCurrentUser();
-    this.currentUser = await this.firebaseService.getUser(authCurrentUser.uid);
-    console.log(this.currentUser);
+    if (authCurrentUser && authCurrentUser.uid) {
+      this.currentUser = await this.firebaseService.getUser(authCurrentUser.uid);
+      console.log(this.currentUser);
+    }
   }
 
   public delay(ms: number) {
@@ -40,8 +55,20 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.usuario, this.especialidadesSeleccionadas, this.fotoDos, this.clave);
-    this.firebaseService.AddUser(this.usuario, this.especialidadesSeleccionadas, this.fotoDos, this.clave);
+    if (this.captchaOkey != false) {
+      console.log(this.usuario, this.especialidadesSeleccionadas, this.fotoDos, this.clave);
+      this.firebaseService.AddUser(this.usuario, this.especialidadesSeleccionadas, this.fotoDos, this.clave);
+    }
+    else {
+      swal.fire({
+        title: 'Error.',
+        text: 'Confirme que no es un robot.',
+        timer: 3000,
+        showCancelButton: false,
+        showConfirmButton: false,
+        icon: "error"
+      });
+    }
   }
 
   esProfesional() {
