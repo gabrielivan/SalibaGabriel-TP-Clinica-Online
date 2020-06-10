@@ -47,9 +47,9 @@ export class FirebaseService {
           .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
             swal.fire({
-              title: 'EXISTO.',
+              title: 'EXITO.',
               text: 'Se registro correctamente',
-              timer: 2000,
+              timer: 3000,
               showCancelButton: false,
               showConfirmButton: false,
               icon: "success"
@@ -66,7 +66,7 @@ export class FirebaseService {
             swal.fire({
               title: 'ERROR.',
               text: 'Ocurrio un error al registrarse',
-              timer: 2000,
+              timer: 3000,
               showCancelButton: false,
               showConfirmButton: false,
               icon: "error"
@@ -80,7 +80,7 @@ export class FirebaseService {
         swal.fire({
           title: 'ERROR.',
           text: 'Ocurrio un error al registrarse',
-          timer: 2000,
+          timer: 3000,
           showCancelButton: false,
           showConfirmButton: false,
           icon: "error"
@@ -103,9 +103,9 @@ export class FirebaseService {
             querySnapshot.forEach((doc) => {
               console.log(doc.data());
               swal.fire({
-                title: 'EXISTO.',
+                title: 'EXITO.',
                 text: 'Se logeo correctamente',
-                timer: 2000,
+                timer: 3000,
                 showCancelButton: false,
                 showConfirmButton: false,
                 icon: "success"
@@ -126,7 +126,7 @@ export class FirebaseService {
         swal.fire({
           title: 'ERROR.',
           text: 'Ocurrio un error al logearse',
-          timer: 2000,
+          timer: 3000,
           showCancelButton: false,
           showConfirmButton: false,
           icon: "error"
@@ -235,7 +235,7 @@ export class FirebaseService {
       })
         .then(function (docRef) {
           swal.fire({
-            title: 'EXISTO.',
+            title: 'EXITO.',
             text: 'Se registro su turno correctamente',
             timer: 2000,
             showCancelButton: false,
@@ -260,7 +260,7 @@ export class FirebaseService {
       db.collection("turnos").doc(doc.id)
         .update({ encuesta: jsonEncuesta });
       swal.fire({
-        title: 'EXISTO.',
+        title: 'EXITO.',
         text: 'Su encuesta fue registrada correctamente',
         timer: 2000,
         showCancelButton: false,
@@ -286,7 +286,7 @@ export class FirebaseService {
           estado: turno.estado
         });
       swal.fire({
-        title: 'EXISTO.',
+        title: 'EXITO.',
         text: 'Su reseña fue registrada correctamente',
         timer: 2000,
         showCancelButton: false,
@@ -314,7 +314,7 @@ export class FirebaseService {
           });
       });
       swal.fire({
-        title: 'EXISTO.',
+        title: 'EXITO.',
         text: 'Se guardaron sus cambios correctamente',
         timer: 2000,
         showCancelButton: false,
