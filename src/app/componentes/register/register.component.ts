@@ -25,8 +25,11 @@ export class RegisterComponent implements OnInit {
   resolved(captchaResponse: string) {
     if (captchaResponse && captchaResponse.length > 0) {
       this.captchaOkey = true;
+      console.log(`Resolved captcha with response: ${captchaResponse}`);
     }
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    else if(captchaResponse === null){//expiro
+      this.captchaOkey = false;
+    }
   }
 
   onScriptLoad() {
