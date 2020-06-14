@@ -15,35 +15,41 @@
     <tbody>
       <tr *ngFor="let turno of turnos">
         <td>{{turno.fecha}}</td>
-        
+
         <td *ngIf="turno.estado == 1"> <button type="button" class="btn btn-warning">Pendiente</button></td>
         <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-primary">Aceptado</button></td>
         <td *ngIf="turno.estado == 3"> <button type="button" class="btn btn-danger">Cancelado</button></td>
         <td *ngIf="turno.estado == 4"> <button type="button" class="btn btn-success">Terminado</button></td>
         <td *ngIf="turno.estado == 5"> <button type="button" class="btn btn-dark">Rechazado</button></td>
 
-        <td *ngIf="!turno.encuesta && turno.resena != ''"> <button type="button"
-            class="btn btn-dark">Sin comentario</button></td>
-        <td *ngIf="turno.encuesta && turno.resena != ''"> <button (click)="verComentario(turno)" type="button" class="btn btn-success">Ver Comentario</button></td>
-        <td *ngIf="!turno.encuesta && turno.resena == ''"> <button type="button" class="btn btn-danger">Falta atender</button></td>
+        <td *ngIf="!turno.encuesta && turno.resena != ''"> <button type="button" class="btn btn-dark">Sin
+            comentario</button></td>
+        <td *ngIf="turno.encuesta && turno.resena != ''"> <button (click)="verComentario(turno)" type="button"
+            class="btn btn-success">Ver Comentario</button></td>
+        <td *ngIf="!turno.encuesta && turno.resena == ''"> <button type="button" class="btn btn-danger">Falta
+            atender</button></td>
         <td>
           <mat-radio-button (click)="cambiarEstado(turno, '2')"></mat-radio-button>
         </td>
         <td>
-            <mat-radio-button (click)="cambiarEstado(turno, '0')"></mat-radio-button>
+          <mat-radio-button (click)="cambiarEstado(turno, '0')"></mat-radio-button>
         </td>
         <td>
-            <mat-radio-button (click)="cambiarEstado(turno, '3')"></mat-radio-button>
+          <mat-radio-button (click)="cambiarEstado(turno, '3')"></mat-radio-button>
         </td>
         <td>
-            <mat-radio-button (click)="cambiarEstado(turno, '5')"></mat-radio-button>
+          <mat-radio-button (click)="cambiarEstado(turno, '5')"></mat-radio-button>
         </td>
       </tr>
     </tbody>
   </table>
-  <button (click)="guardarEstados()" type="button"
-            class="btn btn-info">Guardar los cambios</button>
+  <button (click)="guardarEstados()" type="button" class="btn btn-info">Guardar los cambios</button>
 </div>
+<br />
+<div class="container" *ngIf="atender">
+  <app-encuesta-profesional [turno]="turnoParaAtender"></app-encuesta-profesional>
+</div>
+<br />
 <div class="container" *ngIf="atender">
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Reseña</label>
@@ -52,5 +58,5 @@
   </div>
 </div>
 <div class="container" *ngIf="encuestaComponente">
-  <app-encuesta [turno]="turnoParaEncuesta" (encuestaCompletada) = seCompletoLaEncuesta($event)></app-encuesta>
+  <app-encuesta [turno]="turnoParaEncuesta" (encuestaCompletada)=seCompletoLaEncuesta($event)></app-encuesta>
 </div>

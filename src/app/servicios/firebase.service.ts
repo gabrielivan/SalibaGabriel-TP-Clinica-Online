@@ -271,6 +271,30 @@ export class FirebaseService {
     });
   }
 
+  async guardarEncuestaProfesional(turno: any) {
+    var db = this.db;
+    let usuarios = this.db.collection('turnos')
+    let activeRef = await usuarios
+      .where('fecha', '==', turno.fecha)
+      .where('idPaciente', '==', turno.idPaciente)
+      .get();
+
+    var jsonEncuestaProfesional = JSON.stringify(turno.encuestaProfesional);
+    //update
+    activeRef.docs.forEach(function (doc) {
+      db.collection("turnos").doc(doc.id)
+        .update({ encuestaProfesional: jsonEncuestaProfesional });
+      swal.fire({
+        title: 'EXITO.',
+        text: 'Su encuesta fue registrada correctamente',
+        timer: 2000,
+        showCancelButton: false,
+        showConfirmButton: false,
+        icon: "success"
+      });
+    });
+  }
+
   async guardarResena(turno: any) {
     var db = this.db;
     let usuarios = this.db.collection('turnos')

@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -43,6 +44,7 @@ import { FiltrarHorariosPipe } from './pipes/filtrar-horarios.pipe';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { TurnosProfesionalComponent } from './componentes/turnos-profesional/turnos-profesional.component';
 import { BajaValidarComponent } from './componentes/baja-validar/baja-validar.component';
+import { EncuestaProfesionalComponent } from './componentes/encuesta-profesional/encuesta-profesional.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { BajaValidarComponent } from './componentes/baja-validar/baja-validar.co
     EncuestaComponent,
     TurnosProfesionalComponent,
     BajaValidarComponent,
+    EncuestaProfesionalComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { BajaValidarComponent } from './componentes/baja-validar/baja-validar.co
     MatCheckboxModule,
     MatRadioModule,
     MatSlideToggleModule,
+    MatExpansionModule,
     MatDatepickerModule,
     RecaptchaModule,
     AngularFireModule.initializeApp(firebaseConfig)
