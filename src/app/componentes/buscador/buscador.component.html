@@ -1,26 +1,34 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 <div class="container">
-    <form>
-        <div class="input-group buscador">
-            <input [(ngModel)]="busqueda" type="text" class="form-control" placeholder="Buscar...">
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-info">Buscar</button>
-            </div>
-        </div>
-    </form>
+  <div class="input-group buscador">
+    <input [(ngModel)]="busqueda" type="text" class="form-control" placeholder="Buscar...">
+    <div class="input-group-btn">
+      <button (click)="buscar()" type="button" class="btn btn-info">Buscar</button>
+    </div>
+  </div>
 </div>
 
 <div class="container">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Fecha del turno</th>
-          <th>Estado del turno</th>
-          <th>Apellido del Profesional</th>
-          <th>Apellido del paciente</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Fecha del turno</th>
+        <th>Estado del turno</th>
+        <th>Apellido del Profesional</th>
+        <th>Apellido del paciente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turno of turnosRv">
+        <td>{{turno.fecha}}</td>
+        <td *ngIf="turno.estado == 1"> <button type="button" class="btn btn-warning">Pendiente</button></td>
+        <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-primary">Aceptado</button></td>
+        <td *ngIf="turno.estado == 3"> <button type="button" class="btn btn-danger">Cancelado</button></td>
+        <td *ngIf="turno.estado == 4"> <button type="button" class="btn btn-success">Terminado</button></td>
+        <td *ngIf="turno.estado == 5"> <button type="button" class="btn btn-dark">Rechazado</button></td>
+        <td>{{turno.profesional.apellido}}</td>
+        <td>{{turno.paciente.apellido}}</td>
+      </tr>
+    </tbody>
+  </table>
