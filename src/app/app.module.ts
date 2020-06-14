@@ -45,6 +45,7 @@ import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { TurnosProfesionalComponent } from './componentes/turnos-profesional/turnos-profesional.component';
 import { BajaValidarComponent } from './componentes/baja-validar/baja-validar.component';
 import { EncuestaProfesionalComponent } from './componentes/encuesta-profesional/encuesta-profesional.component';
+import { BuscadorComponent } from './componentes/buscador/buscador.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { EncuestaProfesionalComponent } from './componentes/encuesta-profesional
     TurnosProfesionalComponent,
     BajaValidarComponent,
     EncuestaProfesionalComponent,
+    BuscadorComponent,
   ],
   imports: [
     BrowserModule,

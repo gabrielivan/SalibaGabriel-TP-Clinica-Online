@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<div class="container">
+    <form>
+        <div class="input-group buscador">
+            <input [(ngModel)]="busqueda" type="text" class="form-control" placeholder="Buscar...">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Fecha del turno</th>
+          <th>Estado del turno</th>
+          <th>Apellido del Profesional</th>
+          <th>Apellido del paciente</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
