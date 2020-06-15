@@ -21,8 +21,8 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-label>Días y horarios que ingresaron al sistema: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button>
                 <br /><br />
                 <mat-label>Cantidad de operaciones por especialidad: </mat-label>
@@ -30,8 +30,8 @@
                     <mat-label>Escriba la especialidad</mat-label>
                     <input matInput placeholder="Especialidad" [(ngModel)]="especialidadSeleccionada">
                 </mat-form-field>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button>
             </mat-expansion-panel>
             <mat-expansion-panel>
@@ -44,13 +44,13 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-label>Profesionales por cantidad de turnos: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button>
                 <br /><br />
                 <mat-label>Profesionales por cantidad de dias: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button>
                 <br /><br />
                 <mat-label>Cantidad de turnos por día de la semana: </mat-label>
@@ -58,8 +58,8 @@
                     <mat-label>Escriba el dia</mat-label>
                     <input matInput placeholder="Dia" [(ngModel)]="diaSeleccionado">
                 </mat-form-field>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="exportarComoExcel()">Descargar Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button>
             </mat-expansion-panel>
         </mat-expansion-panel>
