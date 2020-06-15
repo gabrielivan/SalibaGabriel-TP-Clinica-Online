@@ -90,7 +90,8 @@ export class FirebaseService {
 
   }
 
-  login(email, password) {
+  login(email, password, logDelProfesional) {
+    var ref = this;
     var router = this.router;
     var dbRef = this.db;
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -104,6 +105,7 @@ export class FirebaseService {
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               console.log(doc.data());
+              ref.guardarLogDelProfesional(logDelProfesional);
               swal.fire({
                 title: 'EXITO.',
                 text: 'Se logeo correctamente',
@@ -244,6 +246,18 @@ export class FirebaseService {
             icon: "success"
           });
         });
+    }
+  }
+
+  async guardarLogDelProfesional(logDelProfesional: any) {
+    let logs = this.db.collection('logProfesionales');
+    if (logDelProfesional) {
+      logs.add({
+        nombreProfesional: logDelProfesional.NombreProfesional,
+        apellidoProfesional: logDelProfesional.ApellidoProfesional,
+        emailProfesional: logDelProfesional.EmailProfesional,
+        fecha: logDelProfesional.Fecha
+      });
     }
   }
 
