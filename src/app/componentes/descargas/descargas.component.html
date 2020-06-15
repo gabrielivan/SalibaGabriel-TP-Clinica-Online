@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<div style="margin-top: 3%;" class="container">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Informes
+                </mat-panel-title>
+                <mat-panel-description>
+                    Permite descargar Excel, PDF, Graficos.
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Informes de profesionales
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Sus logeos y operaciones.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-label>Días y horarios que ingresaron al sistema: </mat-label>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-info">Grafico</button>
+                <br /><br />
+                <mat-label>Cantidad de operaciones por especialidad: </mat-label>
+                <mat-form-field>
+                    <mat-label>Escriba la especialidad</mat-label>
+                    <input matInput placeholder="Especialidad" [(ngModel)]="especialidadSeleccionada">
+                </mat-form-field>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-info">Grafico</button>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Informes de los dias de la semana
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Cantidades por medico y por turno.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-label>Profesionales por cantidad de turnos: </mat-label>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-info">Grafico</button>
+                <br /><br />
+                <mat-label>Profesionales por cantidad de dias: </mat-label>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-info">Grafico</button>
+                <br /><br />
+                <mat-label>Cantidad de turnos por día de la semana: </mat-label>
+                <mat-form-field>
+                    <mat-label>Escriba el dia</mat-label>
+                    <input matInput placeholder="Dia" [(ngModel)]="diaSeleccionado">
+                </mat-form-field>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success">Excel</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-danger">PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-info">Grafico</button>
+            </mat-expansion-panel>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

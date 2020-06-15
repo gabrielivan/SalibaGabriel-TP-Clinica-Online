@@ -47,6 +47,7 @@ import { BajaValidarComponent } from './componentes/baja-validar/baja-validar.co
 import { EncuestaProfesionalComponent } from './componentes/encuesta-profesional/encuesta-profesional.component';
 import { BuscadorComponent } from './componentes/buscador/buscador.component';
 import { UsuarioDetalleComponent } from './componentes/usuario-detalle/usuario-detalle.component';
+import { DescargasComponent } from './componentes/descargas/descargas.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { UsuarioDetalleComponent } from './componentes/usuario-detalle/usuario-d
     EncuestaProfesionalComponent,
     BuscadorComponent,
     UsuarioDetalleComponent,
+    DescargasComponent,
   ],
   imports: [
     BrowserModule,
