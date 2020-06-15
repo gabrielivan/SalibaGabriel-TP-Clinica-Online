@@ -32,13 +32,15 @@
       </tr>
     </tbody>
   </table>
+  <br>
+  <br>
   <div *ngIf="turnoSeleccionado" class="container">
     <mat-tab-group>
       <mat-tab label="Datos del profesional">
-        Datos del profesional
+        <app-usuario-detalle [usuario]="turnoSeleccionado.profesional"></app-usuario-detalle>
       </mat-tab>
       <mat-tab label="Datos del paciente">
-        Datos del paciente
+        <app-usuario-detalle [usuario]="turnoSeleccionado.paciente"></app-usuario-detalle>
       </mat-tab>
       <mat-tab label="Encuesta del paciente">
         <app-encuesta *ngIf="turnoSeleccionado.encuesta" [turno]="turnoSeleccionado"></app-encuesta>

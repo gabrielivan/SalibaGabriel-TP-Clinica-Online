@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<div class="container">
+    <mat-card style="width: 40%; margin-left: 25%; margin-top: 5%; margin-bottom: 5%;" class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Datos del usuario</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="{{usuario.foto}}" style="width: 300px;" alt="El usuario no tiene foto">
+        <mat-card-content class="cardContent">
+            <div class="inputContent">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre" [(ngModel)]="usuario.nombre" required>
+                </mat-form-field>
+            </div>
+            <div class="inputContent">
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="apellido" [(ngModel)]="usuario.apellido" required>
+                </mat-form-field>
+            </div>
+            <div class="inputContent">
+                <mat-form-field appearance="fill">
+                    <mat-label>Sexo</mat-label>
+                    <mat-select [(ngModel)]="usuario.sexo" required>
+                        <mat-option value="Masculino">
+                            Masculino
+                        </mat-option>
+                        <mat-option value="Femenino">
+                            Femenino
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="inputContent">
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput placeholder="fecha" [(ngModel)]="usuario.fechaDeNacimiento" required>
+                </mat-form-field>
+            </div>
+            <div class="inputContent">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="usuario@usuario.com" [(ngModel)]="usuario.email" required>
+                </mat-form-field>
+            </div>
+            <div class="inputContent" *ngIf="esProfesional()">
+                <mat-form-field>
+                    <mat-label>Especialidades</mat-label>
+                    <mat-select [(ngModel)]="especialidadesSeleccionadas" multiple>
+                        <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad">{{especialidad}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
