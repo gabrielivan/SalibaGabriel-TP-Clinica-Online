@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let turno of turnosRv">
+      <tr (click)="seleccionarTurno(turno)" *ngFor="let turno of turnosRv">
         <td>{{turno.fecha}}</td>
         <td *ngIf="turno.estado == 1"> <button type="button" class="btn btn-warning">Pendiente</button></td>
         <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-primary">Aceptado</button></td>
@@ -32,3 +32,21 @@
       </tr>
     </tbody>
   </table>
+  <div *ngIf="turnoSeleccionado" class="container">
+    <mat-tab-group>
+      <mat-tab label="Datos del profesional">
+        Datos del profesional
+      </mat-tab>
+      <mat-tab label="Datos del paciente">
+        Datos del paciente
+      </mat-tab>
+      <mat-tab label="Encuesta del paciente">
+        <app-encuesta *ngIf="turnoSeleccionado.encuesta" [turno]="turnoSeleccionado"></app-encuesta>
+        <h3 *ngIf="!turnoSeleccionado.encuesta">No hay datos de la encuesta del paciente {{turnoSeleccionado.paciente.apellido}} del turno seleccionado</h3>
+      </mat-tab>
+      <mat-tab label="Historia clinica">
+        <app-encuesta-profesional *ngIf="turnoSeleccionado.encuestaProfesional" [turno]="turnoSeleccionado"></app-encuesta-profesional>
+        <h3 *ngIf="!turnoSeleccionado.encuestaProfesional">No hay datos de la historia clinica que hizo el profesional {{turnoSeleccionado.profesional.apellido}} para el turno seleccionado</h3>
+      </mat-tab>
+    </mat-tab-group>
+  </div>

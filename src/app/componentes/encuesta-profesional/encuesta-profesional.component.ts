@@ -16,15 +16,25 @@ export class EncuestaProfesionalComponent implements OnInit {
   presiones = ["12.6", "12.8", "13.6", "13.8", "14.6", "14.8", "15.6", "15.8", "16.6", "16.8"];
 
   propiedades = [
-    {campo : "campo", valor: "valor"},
-    {campo : "campo", valor: "valor"},
-    {campo : "campo", valor: "valor"}
+    { campo: "campo", valor: "valor" },
+    { campo: "campo", valor: "valor" },
+    { campo: "campo", valor: "valor" }
   ];
 
   constructor(public firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
-    this.encuestaProfesional = new EncuestaProfesional("", "", "", "", 36, 180, 18, "", "");
+    if (this.turno.encuestaProfesional) {
+      var encuestaProfesional = JSON.parse(this.turno.encuestaProfesional);
+      this.encuestaProfesional = encuestaProfesional;
+      this.encuestaProfesional.OtrasPropiedadesPaciente = JSON.parse(this.encuestaProfesional.OtrasPropiedadesPaciente);
+      this.propiedades[0] = this.encuestaProfesional.OtrasPropiedadesPaciente[0];
+      this.propiedades[1] = this.encuestaProfesional.OtrasPropiedadesPaciente[1];
+      this.propiedades[2] = this.encuestaProfesional.OtrasPropiedadesPaciente[2];
+    }
+    else {
+      this.encuestaProfesional = new EncuestaProfesional("", "", "", "", 36, 180, 18, "", "");
+    }
   }
 
   guardarEncuesta() {

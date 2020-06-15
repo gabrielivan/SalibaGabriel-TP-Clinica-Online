@@ -10,6 +10,7 @@ import { RepositionScrollStrategy } from '@angular/cdk/overlay';
 })
 export class BuscadorComponent implements OnInit {
 
+  turnoSeleccionado: any = null;
   busqueda: string = "";
   usuarios: any = [];
   auxTurnos: any = [];
@@ -141,6 +142,10 @@ export class BuscadorComponent implements OnInit {
     retorno = date.concat("/", month, "/", year, " ", hours, ":", minutes, " hs.");
     return retorno;
 
+  }
+
+  seleccionarTurno(turno: any){
+    this.turnoSeleccionado = turno;
   }
 
 }
