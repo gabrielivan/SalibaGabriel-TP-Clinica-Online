@@ -48,6 +48,8 @@ import { EncuestaProfesionalComponent } from './componentes/encuesta-profesional
 import { BuscadorComponent } from './componentes/buscador/buscador.component';
 import { UsuarioDetalleComponent } from './componentes/usuario-detalle/usuario-detalle.component';
 import { DescargasComponent } from './componentes/descargas/descargas.component';
+import { GraficosComponent } from './componentes/graficos/graficos.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { DescargasComponent } from './componentes/descargas/descargas.component'
     BuscadorComponent,
     UsuarioDetalleComponent,
     DescargasComponent,
+    GraficosComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,7 @@ import { DescargasComponent } from './componentes/descargas/descargas.component'
     MatExpansionModule,
     MatDatepickerModule,
     RecaptchaModule,
+    HighchartsChartModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
