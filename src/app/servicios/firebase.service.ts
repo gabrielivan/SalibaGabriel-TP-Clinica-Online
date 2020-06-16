@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Turno } from '../clases/turno';
 import { Horario } from '../clases/horario';
+import{ LogProfesional} from '../clases/logProfesional';
 
 @Injectable({
   providedIn: 'root'
@@ -191,6 +192,20 @@ export class FirebaseService {
     var rv = [];
     for (let u of usrsRef.docs) {
       rv.push(u.data() as Usuario);
+    }
+    return rv;
+  }
+
+  async getLogProfesionales() {
+    let logsRef = await this.db.collection('logProfesionales').get();
+    var rv = [];
+    for (let u of logsRef.docs) {
+      rv.push(u.data() as LogProfesional);
+    }
+    for (let r of rv) {
+      let unix_timestamp = r.fecha.seconds
+      var date = new Date(unix_timestamp * 1000);
+      r.fecha = date;
     }
     return rv;
   }

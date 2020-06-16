@@ -7,6 +7,7 @@ export class Turno {
     Fecha: Date;
     Resena: string;
     Encuesta: string;
+    EspecialidadAtendida: string;
 
     public constructor(id: number, idProfesional: string, idPaciente: string, fecha: Date, estado: Estado) { 
         this.Id = id;
