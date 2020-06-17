@@ -28,7 +28,7 @@
                 <mat-label>Cantidad de operaciones por especialidad: </mat-label>
                 <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(1, 2)">Descargar Excel</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-danger" (click)="descargarInformeProfesionales(2, 2)">Descargar PDF</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-info" (click)="verGrafico(2)">Ver Grafico</button>
             </mat-expansion-panel>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -60,4 +60,7 @@
             </mat-expansion-panel>
         </mat-expansion-panel>
     </mat-accordion>
+</div>
+<div *ngIf="verComponenteGrafico">
+    <app-graficos></app-graficos>
 </div>

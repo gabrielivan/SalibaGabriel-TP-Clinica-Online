@@ -11,6 +11,7 @@ import { Turno } from 'src/app/clases/turno';
 })
 export class DescargasComponent implements OnInit {
 
+  verComponenteGrafico: boolean = false;
   logProfesionales: any[];
   diaSeleccionado: string = "";
   usuarios: any = [];
@@ -46,19 +47,19 @@ export class DescargasComponent implements OnInit {
       else if (tipoDeInforme == 2) {//Cantidad de operaciones por especialidad
         var rv = [];
         var helper = {};
-        var result = this.turnos.reduce(function(r, o) {
+        var result = this.turnos.reduce(function (r, o) {
           var key = o.profesional.uid + '-' + o.especialidadAtendida;
-          
-          if(!helper[key]) {
+
+          if (!helper[key]) {
             helper[key] = Object.assign({}, o);
             r.push(helper[key]);
           } else {
             helper[key].instances += o.instances;
           }
-        
+
           return r;
         }, []);
-        
+
         result.forEach(r => {
           rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances.toString()));
         });
@@ -95,7 +96,7 @@ export class DescargasComponent implements OnInit {
       profesional: "",
       paciente: "",
       especialidadAtendida: "",
-      instances: 1 
+      instances: 1
     }
     auxTurnos.forEach(auxTurno => {
       turno.fecha = this.stringFecha(auxTurno.fecha);
@@ -129,6 +130,57 @@ export class DescargasComponent implements OnInit {
       }
     });
     return rv;
+  }
+
+  verGrafico(tipo: number) {
+    this.verComponenteGrafico = true;
+
+    switch (tipo) {
+      case 1: {
+        this.preparacionDeDataParaGraficos(1);
+        break;
+      }
+      case 2: {
+        this.preparacionDeDataParaGraficos(2);
+        break;
+      }
+      case 3: {
+        this.preparacionDeDataParaGraficos(3);
+        break;
+      }
+      case 4: {
+        this.preparacionDeDataParaGraficos(4);
+        break;
+      }
+      case 5: {
+        this.preparacionDeDataParaGraficos(5);
+        break;
+      }
+    }
+  }
+
+  preparacionDeDataParaGraficos(tipo: number) {
+    if (tipo == 2) {
+      var rv = [];
+      var helper = {};
+      var result = this.turnos.reduce(function (r, o) {
+        var key = o.profesional.uid + '-' + o.especialidadAtendida;
+
+        if (!helper[key]) {
+          helper[key] = Object.assign({}, o);
+          r.push(helper[key]);
+        } else {
+          helper[key].instances += o.instances;
+        }
+
+        return r;
+      }, []);
+
+      result.forEach(r => {
+        rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances.toString()));
+      });
+      console.log(rv);
+    }
   }
 
 }

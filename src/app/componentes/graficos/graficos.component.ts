@@ -15,14 +15,6 @@ export class GraficosComponent implements OnInit {
 
   title = 'myHighchart';
 
-  // data = [{
-  //   name: 'ItSolutionStuff.com',
-  //   data: [1, 2, 3, 4]
-  // }, {
-  //   name: 'Nicesnippets.com',
-  //   data: [3, 6, 9, 12]
-  // }];
-
   data = [{
     name: 'Cantidad de operaciones',
     data: [3, 6, 9]

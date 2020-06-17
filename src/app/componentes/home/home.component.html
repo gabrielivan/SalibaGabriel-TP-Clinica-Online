@@ -9,5 +9,4 @@
     <mat-tab *ngIf="esProfesional()" label="Disponibilidad"> <app-agregar-disponibilidad [profesional]="currentUser"></app-agregar-disponibilidad> </mat-tab>
     <mat-tab *ngIf="esAdministrador()" label="Buscador"> <app-buscador></app-buscador></mat-tab>
     <mat-tab *ngIf="esAdministrador()" label="Descargas"> <app-descargas></app-descargas></mat-tab>
-    <mat-tab label="Graficos"> <app-graficos></app-graficos></mat-tab>
 </mat-tab-group>
