@@ -147,6 +147,7 @@ export class DescargasComponent implements OnInit {
       }
       case 3: {
         this.preparacionDeDataParaGraficosTres();
+        this.verComponenteGrafico = true;
         break;
       }
       case 4: {
@@ -193,15 +194,31 @@ export class DescargasComponent implements OnInit {
 
   }
 
-  preparacionDeDataParaGraficosTres(){
+  preparacionDeDataParaGraficosTres() {
+    var objeto = new ObjetoChart([], "", "", []);
+    var result = this.turnos.reduce(function (r, a) {
+      r[a.profesional.uid] = r[a.profesional.uid] || [];
+      r[a.profesional.uid].push(a);
+      return r;
+    }, Object.create(null));
+
+    console.log(result);
+    Object.keys(result).forEach(element => {
+      objeto.ObjetoDeLaData.name = "Cantidad de turnos";
+      objeto.ObjetoDeLaData.data.push(result[element].length);
+      objeto.Categorias.push(result[element][0].profesional.apellido);
+    });
+    objeto.Data.push(objeto.ObjetoDeLaData);
+    objeto.TextoUno = "Profesionales por cantidad de turnos";
+    objeto.TextoDos = "Profesionales";
+    this.objetoParaChart = objeto;
+  }
+
+  preparacionDeDataParaGraficosCuatro() {
 
   }
 
-  preparacionDeDataParaGraficosCuatro(){
-
-  }
-
-  preparacionDeDataParaGraficosCinco(){
+  preparacionDeDataParaGraficosCinco() {
 
   }
 
