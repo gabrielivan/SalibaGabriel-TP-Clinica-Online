@@ -13,7 +13,8 @@ import { ObjetoChart } from 'src/app/clases/objetoChart';
 export class DescargasComponent implements OnInit {
 
   objetoParaChart: ObjetoChart;
-  verComponenteGrafico: boolean = false;
+  verComponenteGraficoDos: boolean = false;
+  verComponenteGraficoTres: boolean = false;
   logProfesionales: any[];
   diaSeleccionado: string = "";
   usuarios: any = [];
@@ -142,12 +143,12 @@ export class DescargasComponent implements OnInit {
       }
       case 2: {
         this.preparacionDeDataParaGraficosDos();
-        this.verComponenteGrafico = true;
+        this.verComponenteGraficoDos = true;
         break;
       }
       case 3: {
         this.preparacionDeDataParaGraficosTres();
-        this.verComponenteGrafico = true;
+        this.verComponenteGraficoTres = true;
         break;
       }
       case 4: {
@@ -162,6 +163,9 @@ export class DescargasComponent implements OnInit {
   }
 
   preparacionDeDataParaGraficosDos() {
+    this.verComponenteGraficoDos = false;
+    this.verComponenteGraficoTres = false;
+    this.objetoParaChart = null;
     var objeto = new ObjetoChart([], "", "", []);
     var rv = [];
     var helper = {};
@@ -195,6 +199,9 @@ export class DescargasComponent implements OnInit {
   }
 
   preparacionDeDataParaGraficosTres() {
+    this.verComponenteGraficoDos = false;
+    this.verComponenteGraficoTres = false;
+    this.objetoParaChart = null;
     var objeto = new ObjetoChart([], "", "", []);
     var result = this.turnos.reduce(function (r, a) {
       r[a.profesional.uid] = r[a.profesional.uid] || [];
