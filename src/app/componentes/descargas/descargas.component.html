@@ -61,6 +61,6 @@
         </mat-expansion-panel>
     </mat-accordion>
 </div>
-<div *ngIf="verComponenteGrafico">
-    <app-graficos></app-graficos>
+<div>
+    <app-graficos *ngIf="verComponenteGrafico" [objeto]="objetoParaChart"></app-graficos>
 </div>

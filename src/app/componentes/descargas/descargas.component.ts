@@ -3,6 +3,7 @@ import { ExcelService } from '../../servicios/excel.service';
 import { FirebaseService } from '../../servicios/firebase.service';
 import { OperacionesPorEspecialidad } from '../../clases/operacionesPorEspecialidad';
 import { Turno } from 'src/app/clases/turno';
+import { ObjetoChart } from 'src/app/clases/objetoChart';
 
 @Component({
   selector: 'app-descargas',
@@ -11,6 +12,7 @@ import { Turno } from 'src/app/clases/turno';
 })
 export class DescargasComponent implements OnInit {
 
+  objetoParaChart: ObjetoChart;
   verComponenteGrafico: boolean = false;
   logProfesionales: any[];
   diaSeleccionado: string = "";
@@ -133,8 +135,7 @@ export class DescargasComponent implements OnInit {
   }
 
   verGrafico(tipo: number) {
-    this.verComponenteGrafico = true;
-
+    
     switch (tipo) {
       case 1: {
         this.preparacionDeDataParaGraficos(1);
@@ -142,6 +143,7 @@ export class DescargasComponent implements OnInit {
       }
       case 2: {
         this.preparacionDeDataParaGraficos(2);
+        this.verComponenteGrafico = true;
         break;
       }
       case 3: {
@@ -161,6 +163,7 @@ export class DescargasComponent implements OnInit {
 
   preparacionDeDataParaGraficos(tipo: number) {
     if (tipo == 2) {
+      var objeto = new ObjetoChart([], "", "", []);
       var rv = [];
       var helper = {};
       var result = this.turnos.reduce(function (r, o) {
@@ -177,9 +180,19 @@ export class DescargasComponent implements OnInit {
       }, []);
 
       result.forEach(r => {
-        rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances.toString()));
+        rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances));
       });
       console.log(rv);
+      rv.forEach(element => {
+        objeto.ObjetoDeLaData.name = "Cantidad de operaciones";
+        objeto.ObjetoDeLaData.data.push(element.Cantidad);
+        objeto.Categorias.push(element.Especialidad);
+      });
+      objeto.Data.push(objeto.ObjetoDeLaData);
+      objeto.TextoUno = "Cantidad de operaciones por especialidad";
+      objeto.TextoDos = "Profesionales";
+      this.objetoParaChart = objeto;
+
     }
   }
 
