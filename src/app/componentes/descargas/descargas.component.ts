@@ -135,65 +135,74 @@ export class DescargasComponent implements OnInit {
   }
 
   verGrafico(tipo: number) {
-    
+
     switch (tipo) {
       case 1: {
-        this.preparacionDeDataParaGraficos(1);
         break;
       }
       case 2: {
-        this.preparacionDeDataParaGraficos(2);
+        this.preparacionDeDataParaGraficosDos();
         this.verComponenteGrafico = true;
         break;
       }
       case 3: {
-        this.preparacionDeDataParaGraficos(3);
+        this.preparacionDeDataParaGraficosTres();
         break;
       }
       case 4: {
-        this.preparacionDeDataParaGraficos(4);
+        this.preparacionDeDataParaGraficosCuatro();
         break;
       }
       case 5: {
-        this.preparacionDeDataParaGraficos(5);
+        this.preparacionDeDataParaGraficosCinco();
         break;
       }
     }
   }
 
-  preparacionDeDataParaGraficos(tipo: number) {
-    if (tipo == 2) {
-      var objeto = new ObjetoChart([], "", "", []);
-      var rv = [];
-      var helper = {};
-      var result = this.turnos.reduce(function (r, o) {
-        var key = o.profesional.uid + '-' + o.especialidadAtendida;
+  preparacionDeDataParaGraficosDos() {
+    var objeto = new ObjetoChart([], "", "", []);
+    var rv = [];
+    var helper = {};
+    var result = this.turnos.reduce(function (r, o) {
+      var key = o.profesional.uid + '-' + o.especialidadAtendida;
 
-        if (!helper[key]) {
-          helper[key] = Object.assign({}, o);
-          r.push(helper[key]);
-        } else {
-          helper[key].instances += o.instances;
-        }
+      if (!helper[key]) {
+        helper[key] = Object.assign({}, o);
+        r.push(helper[key]);
+      } else {
+        helper[key].instances += o.instances;
+      }
 
-        return r;
-      }, []);
+      return r;
+    }, []);
 
-      result.forEach(r => {
-        rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances));
-      });
-      console.log(rv);
-      rv.forEach(element => {
-        objeto.ObjetoDeLaData.name = "Cantidad de operaciones";
-        objeto.ObjetoDeLaData.data.push(element.Cantidad);
-        objeto.Categorias.push(element.Especialidad);
-      });
-      objeto.Data.push(objeto.ObjetoDeLaData);
-      objeto.TextoUno = "Cantidad de operaciones por especialidad";
-      objeto.TextoDos = "Profesionales";
-      this.objetoParaChart = objeto;
+    result.forEach(r => {
+      rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances));
+    });
+    console.log(rv);
+    rv.forEach(element => {
+      objeto.ObjetoDeLaData.name = "Cantidad de operaciones";
+      objeto.ObjetoDeLaData.data.push(element.Cantidad);
+      objeto.Categorias.push(element.Especialidad);
+    });
+    objeto.Data.push(objeto.ObjetoDeLaData);
+    objeto.TextoUno = "Cantidad de operaciones por especialidad";
+    objeto.TextoDos = "Profesionales";
+    this.objetoParaChart = objeto;
 
-    }
+  }
+
+  preparacionDeDataParaGraficosTres(){
+
+  }
+
+  preparacionDeDataParaGraficosCuatro(){
+
+  }
+
+  preparacionDeDataParaGraficosCinco(){
+
   }
 
 }
