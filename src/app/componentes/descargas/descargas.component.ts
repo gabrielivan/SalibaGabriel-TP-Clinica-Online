@@ -15,6 +15,7 @@ export class DescargasComponent implements OnInit {
   objetoParaChart: ObjetoChart;
   verComponenteGraficoDos: boolean = false;
   verComponenteGraficoTres: boolean = false;
+  verComponenteGraficoCuatro: boolean = false;
   logProfesionales: any[];
   diaSeleccionado: string = "";
   usuarios: any = [];
@@ -153,6 +154,7 @@ export class DescargasComponent implements OnInit {
       }
       case 4: {
         this.preparacionDeDataParaGraficosCuatro();
+        this.verComponenteGraficoCuatro = true;
         break;
       }
       case 5: {
@@ -165,6 +167,7 @@ export class DescargasComponent implements OnInit {
   preparacionDeDataParaGraficosDos() {
     this.verComponenteGraficoDos = false;
     this.verComponenteGraficoTres = false;
+    this.verComponenteGraficoCuatro = false;
     this.objetoParaChart = null;
     var objeto = new ObjetoChart([], "", "", []);
     var rv = [];
@@ -201,6 +204,7 @@ export class DescargasComponent implements OnInit {
   preparacionDeDataParaGraficosTres() {
     this.verComponenteGraficoDos = false;
     this.verComponenteGraficoTres = false;
+    this.verComponenteGraficoCuatro = false;
     this.objetoParaChart = null;
     var objeto = new ObjetoChart([], "", "", []);
     var result = this.turnos.reduce(function (r, a) {
@@ -222,7 +226,52 @@ export class DescargasComponent implements OnInit {
   }
 
   preparacionDeDataParaGraficosCuatro() {
+    this.verComponenteGraficoDos = false;
+    this.verComponenteGraficoTres = false;
+    this.verComponenteGraficoCuatro = false;
+    this.objetoParaChart = null;
+    var objeto = new ObjetoChart([], "", "", []);
+    var lunesArray = [];
+    var martesArray = [];
+    var miercolesArray = [];
+    var juevesArray = [];
+    var viernesArray = [];
+    var sabadosArray = [];
 
+    this.usuarios.forEach(usuario => {
+      if (usuario.tipo == "2") {
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Lunes")) {
+          lunesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Martes")) {
+          martesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Miercoles")) {
+          miercolesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Jueves")) {
+          juevesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Viernes")) {
+          viernesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Sabado")) {
+          sabadosArray.push(usuario);
+        }
+      }
+    });
+    objeto.ObjetoDeLaData.data.push(lunesArray.length);
+    objeto.ObjetoDeLaData.data.push(martesArray.length);
+    objeto.ObjetoDeLaData.data.push(miercolesArray.length);
+    objeto.ObjetoDeLaData.data.push(juevesArray.length);
+    objeto.ObjetoDeLaData.data.push(viernesArray.length);
+    objeto.ObjetoDeLaData.data.push(sabadosArray.length);
+    objeto.ObjetoDeLaData.name = "Medicos por cantidad de dias";
+    objeto.Categorias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    objeto.TextoUno = "Profesionales por cantidad de dias";
+    objeto.TextoDos = "Profesionales";
+    objeto.Data.push(objeto.ObjetoDeLaData);
+    this.objetoParaChart = objeto;
   }
 
   preparacionDeDataParaGraficosCinco() {
