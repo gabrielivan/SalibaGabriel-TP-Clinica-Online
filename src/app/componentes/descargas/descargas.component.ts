@@ -16,6 +16,7 @@ export class DescargasComponent implements OnInit {
   verComponenteGraficoDos: boolean = false;
   verComponenteGraficoTres: boolean = false;
   verComponenteGraficoCuatro: boolean = false;
+  verComponenteGraficoCinco: boolean = false;
   logProfesionales: any[];
   diaSeleccionado: string = "";
   usuarios: any = [];
@@ -159,6 +160,7 @@ export class DescargasComponent implements OnInit {
       }
       case 5: {
         this.preparacionDeDataParaGraficosCinco();
+        this.verComponenteGraficoCinco = true;
         break;
       }
     }
@@ -168,6 +170,7 @@ export class DescargasComponent implements OnInit {
     this.verComponenteGraficoDos = false;
     this.verComponenteGraficoTres = false;
     this.verComponenteGraficoCuatro = false;
+    this.verComponenteGraficoCinco = false;
     this.objetoParaChart = null;
     var objeto = new ObjetoChart([], "", "", []);
     var rv = [];
@@ -205,6 +208,7 @@ export class DescargasComponent implements OnInit {
     this.verComponenteGraficoDos = false;
     this.verComponenteGraficoTres = false;
     this.verComponenteGraficoCuatro = false;
+    this.verComponenteGraficoCinco = false;
     this.objetoParaChart = null;
     var objeto = new ObjetoChart([], "", "", []);
     var result = this.turnos.reduce(function (r, a) {
@@ -229,6 +233,7 @@ export class DescargasComponent implements OnInit {
     this.verComponenteGraficoDos = false;
     this.verComponenteGraficoTres = false;
     this.verComponenteGraficoCuatro = false;
+    this.verComponenteGraficoCinco = false;
     this.objetoParaChart = null;
     var objeto = new ObjetoChart([], "", "", []);
     var lunesArray = [];
@@ -275,7 +280,53 @@ export class DescargasComponent implements OnInit {
   }
 
   preparacionDeDataParaGraficosCinco() {
+    this.verComponenteGraficoDos = false;
+    this.verComponenteGraficoTres = false;
+    this.verComponenteGraficoCuatro = false;
+    this.verComponenteGraficoCinco = false;
+    this.objetoParaChart = null;
+    var objeto = new ObjetoChart([], "", "", []);
+    var lunesArray = [];
+    var martesArray = [];
+    var miercolesArray = [];
+    var juevesArray = [];
+    var viernesArray = [];
+    var sabadosArray = [];
 
+    this.auxTurnos.forEach(turno => {
+      if (turno.fecha) {
+        if (turno.fecha.getDay() == 1) {
+          lunesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 2) {
+          martesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 3) {
+          miercolesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 4) {
+          juevesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 5) {
+          viernesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 6) {
+          sabadosArray.push(turno);
+        }
+      }
+    });
+    objeto.ObjetoDeLaData.data.push(lunesArray.length);
+    objeto.ObjetoDeLaData.data.push(martesArray.length);
+    objeto.ObjetoDeLaData.data.push(miercolesArray.length);
+    objeto.ObjetoDeLaData.data.push(juevesArray.length);
+    objeto.ObjetoDeLaData.data.push(viernesArray.length);
+    objeto.ObjetoDeLaData.data.push(sabadosArray.length);
+    objeto.ObjetoDeLaData.name = "Turnos por dias";
+    objeto.Categorias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    objeto.TextoUno = "Cantidad de turnos por día de la semana";
+    objeto.TextoDos = "Turnos";
+    objeto.Data.push(objeto.ObjetoDeLaData);
+    this.objetoParaChart = objeto;
   }
 
 }

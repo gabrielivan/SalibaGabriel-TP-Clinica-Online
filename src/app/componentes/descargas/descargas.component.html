@@ -50,19 +50,16 @@
                 <button style="margin-left: 10px;" type="button" class="btn btn-info" (click)="verGrafico(4)">Ver Grafico</button>
                 <br /><br />
                 <mat-label>Cantidad de turnos por día de la semana: </mat-label>
-                <mat-form-field>
-                    <mat-label>Escriba el dia</mat-label>
-                    <input matInput placeholder="Dia" [(ngModel)]="diaSeleccionado">
-                </mat-form-field>
                 <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-info" (click)="verGrafico(5)">Ver Grafico</button>
             </mat-expansion-panel>
         </mat-expansion-panel>
     </mat-accordion>
 </div>
 <div>
-    <app-graficos *ngIf="verComponenteGraficoDos && !verComponenteGraficoTres && !verComponenteGraficoCuatro" [objeto]="objetoParaChart"></app-graficos>
-    <app-graficos *ngIf="verComponenteGraficoTres && !verComponenteGraficoDos && !verComponenteGraficoCuatro" [objeto]="objetoParaChart"></app-graficos>
-    <app-graficos *ngIf="verComponenteGraficoCuatro && !verComponenteGraficoDos && !verComponenteGraficoTres" [objeto]="objetoParaChart"></app-graficos>
+    <app-graficos *ngIf="verComponenteGraficoDos && !verComponenteGraficoTres && !verComponenteGraficoCuatro && !verComponenteGraficoCinco" [objeto]="objetoParaChart"></app-graficos>
+    <app-graficos *ngIf="verComponenteGraficoTres && !verComponenteGraficoDos && !verComponenteGraficoCuatro && !verComponenteGraficoCinco" [objeto]="objetoParaChart"></app-graficos>
+    <app-graficos *ngIf="verComponenteGraficoCuatro && !verComponenteGraficoDos && !verComponenteGraficoTres && !verComponenteGraficoCinco" [objeto]="objetoParaChart"></app-graficos>
+    <app-graficos *ngIf="verComponenteGraficoCinco && !verComponenteGraficoDos && !verComponenteGraficoTres && !verComponenteGraficoCuatro" [objeto]="objetoParaChart"></app-graficos>
 </div>
