@@ -413,12 +413,8 @@ export class DescargasComponent implements OnInit {
   }
 
   descargarExcelInforme5(){
-    this.verComponenteGraficoDos = false;
-    this.verComponenteGraficoTres = false;
-    this.verComponenteGraficoCuatro = false;
-    this.verComponenteGraficoCinco = false;
-    this.objetoParaChart = null;
-    var objeto = new ObjetoChart([], "", "", []);
+    var rv = [];
+    var objeto = new Excel5("","");
     var lunesArray = [];
     var martesArray = [];
     var miercolesArray = [];
@@ -448,19 +444,30 @@ export class DescargasComponent implements OnInit {
         }
       }
     });
-    objeto.ObjetoDeLaData.data.push(lunesArray.length);
-    objeto.ObjetoDeLaData.data.push(martesArray.length);
-    objeto.ObjetoDeLaData.data.push(miercolesArray.length);
-    objeto.ObjetoDeLaData.data.push(juevesArray.length);
-    objeto.ObjetoDeLaData.data.push(viernesArray.length);
-    objeto.ObjetoDeLaData.data.push(sabadosArray.length);
-    objeto.ObjetoDeLaData.name = "Turnos por dias";
-    objeto.Categorias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
-    objeto.TextoUno = "Cantidad de turnos por día de la semana";
-    objeto.TextoDos = "Turnos";
-    objeto.Data.push(objeto.ObjetoDeLaData);
-    this.objetoParaChart = objeto;
-    console.log(this.objetoParaChart)
+    objeto.DiaDeLaSemana = "Lunes";
+    objeto.CantidadDeTurnos = lunesArray.length.toString();
+    rv.push(new Excel5(objeto.DiaDeLaSemana, objeto.CantidadDeTurnos));
+
+    objeto.DiaDeLaSemana = "Martes";
+    objeto.CantidadDeTurnos = martesArray.length.toString();
+    rv.push(new Excel5(objeto.DiaDeLaSemana, objeto.CantidadDeTurnos));
+
+    objeto.DiaDeLaSemana = "Miercoles";
+    objeto.CantidadDeTurnos = miercolesArray.length.toString();
+    rv.push(new Excel5(objeto.DiaDeLaSemana, objeto.CantidadDeTurnos));
+
+    objeto.DiaDeLaSemana = "Jueves";
+    objeto.CantidadDeTurnos = juevesArray.length.toString();
+    rv.push(new Excel5(objeto.DiaDeLaSemana, objeto.CantidadDeTurnos));
+
+    objeto.DiaDeLaSemana = "Viernes";
+    objeto.CantidadDeTurnos = viernesArray.length.toString();
+    rv.push(new Excel5(objeto.DiaDeLaSemana, objeto.CantidadDeTurnos));
+
+    objeto.DiaDeLaSemana = "Sabado";
+    objeto.CantidadDeTurnos = sabadosArray.length.toString();
+    rv.push(new Excel5(objeto.DiaDeLaSemana, objeto.CantidadDeTurnos));
+    this.exportarComoExcel(rv, "Cantidad de turnos por día de la semana");
   }
 
 }

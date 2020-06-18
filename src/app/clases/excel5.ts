@@ -1,10 +1,10 @@
 export class Excel5 {
 
-    ApellidoProfesional: string;
+    DiaDeLaSemana: string;
     CantidadDeTurnos: string;
 
-    public constructor(apellidoProfesional: string, cantidadDeTurnos: string) {
-        this.ApellidoProfesional = apellidoProfesional;
+    public constructor(diaDeLaSemana: string, cantidadDeTurnos: string) {
+        this.DiaDeLaSemana = diaDeLaSemana;
         this.CantidadDeTurnos = cantidadDeTurnos;
     }
 
