@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { ObjetoChart } from 'src/app/clases/objetoChart';
+import HighchartExporting from 'highcharts/modules/exporting';
+import HighchartExportData from 'highcharts/modules/export-data';
 
 @Component({
   selector: 'app-graficos',
@@ -45,6 +47,9 @@ export class GraficosComponent implements OnInit {
       },
       series: this.data
     };
+
+    HighchartExporting(Highcharts);
+    HighchartExportData(Highcharts);
   }
 
   // title = 'myHighchart';
