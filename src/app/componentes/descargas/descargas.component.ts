@@ -5,6 +5,8 @@ import { OperacionesPorEspecialidad } from '../../clases/operacionesPorEspeciali
 import { Turno } from 'src/app/clases/turno';
 import { ObjetoChart } from 'src/app/clases/objetoChart';
 import { Excel3 } from 'src/app/clases/excel3';
+import { Excel4 } from 'src/app/clases/excel4';
+import { Excel5 } from 'src/app/clases/excel5';
 
 @Component({
   selector: 'app-descargas',
@@ -353,12 +355,8 @@ export class DescargasComponent implements OnInit {
   }
 
   descargarExcelInforme4(){
-    this.verComponenteGraficoDos = false;
-    this.verComponenteGraficoTres = false;
-    this.verComponenteGraficoCuatro = false;
-    this.verComponenteGraficoCinco = false;
-    this.objetoParaChart = null;
-    var objeto = new ObjetoChart([], "", "", []);
+    var rv = [];
+    var objeto = new Excel4("","");
     var lunesArray = [];
     var martesArray = [];
     var miercolesArray = [];
@@ -388,19 +386,30 @@ export class DescargasComponent implements OnInit {
         }
       }
     });
-    objeto.ObjetoDeLaData.data.push(lunesArray.length);
-    objeto.ObjetoDeLaData.data.push(martesArray.length);
-    objeto.ObjetoDeLaData.data.push(miercolesArray.length);
-    objeto.ObjetoDeLaData.data.push(juevesArray.length);
-    objeto.ObjetoDeLaData.data.push(viernesArray.length);
-    objeto.ObjetoDeLaData.data.push(sabadosArray.length);
-    objeto.ObjetoDeLaData.name = "Medicos por cantidad de dias";
-    objeto.Categorias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
-    objeto.TextoUno = "Profesionales por cantidad de dias";
-    objeto.TextoDos = "Profesionales";
-    objeto.Data.push(objeto.ObjetoDeLaData);
-    this.objetoParaChart = objeto;
-    console.log(this.objetoParaChart)
+    objeto.DiaDeLaSemana = "Lunes";
+    objeto.CantidadDeMedicos = lunesArray.length.toString();
+    rv.push(new Excel4(objeto.DiaDeLaSemana, objeto.CantidadDeMedicos));
+
+    objeto.DiaDeLaSemana = "Martes";
+    objeto.CantidadDeMedicos = martesArray.length.toString();
+    rv.push(new Excel4(objeto.DiaDeLaSemana, objeto.CantidadDeMedicos));
+
+    objeto.DiaDeLaSemana = "Miercoles";
+    objeto.CantidadDeMedicos = miercolesArray.length.toString();
+    rv.push(new Excel4(objeto.DiaDeLaSemana, objeto.CantidadDeMedicos));
+
+    objeto.DiaDeLaSemana = "Jueves";
+    objeto.CantidadDeMedicos = juevesArray.length.toString();
+    rv.push(new Excel4(objeto.DiaDeLaSemana, objeto.CantidadDeMedicos));
+
+    objeto.DiaDeLaSemana = "Viernes";
+    objeto.CantidadDeMedicos = viernesArray.length.toString();
+    rv.push(new Excel4(objeto.DiaDeLaSemana, objeto.CantidadDeMedicos));
+
+    objeto.DiaDeLaSemana = "Sabado";
+    objeto.CantidadDeMedicos = sabadosArray.length.toString();
+    rv.push(new Excel4(objeto.DiaDeLaSemana, objeto.CantidadDeMedicos));
+    this.exportarComoExcel(rv, "Profesionales por cantidad de dias");
   }
 
   descargarExcelInforme5(){
