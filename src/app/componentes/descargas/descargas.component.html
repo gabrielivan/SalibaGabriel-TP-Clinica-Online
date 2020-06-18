@@ -21,13 +21,10 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-label>Días y horarios que ingresaron al sistema: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(1, 1)">Descargar Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger" (click)="descargarInformeProfesionales(2, 1)">Descargar PDF</button>
-                <!-- <button style="margin-left: 10px;" type="button" class="btn btn-info">Ver Grafico</button> -->
+                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(1)">Descargar Excel</button>
                 <br /><br />
                 <mat-label>Cantidad de operaciones por especialidad: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(1, 2)">Descargar Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger" (click)="descargarInformeProfesionales(2, 2)">Descargar PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(2)">Descargar Excel</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info" (click)="verGrafico(2)">Ver Grafico</button>
             </mat-expansion-panel>
             <mat-expansion-panel>
@@ -40,18 +37,15 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-label>Profesionales por cantidad de turnos: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(3)">Descargar Excel</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info" (click)="verGrafico(3)">Ver Grafico</button>
                 <br /><br />
                 <mat-label>Profesionales por cantidad de dias: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(4)">Descargar Excel</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info" (click)="verGrafico(4)">Ver Grafico</button>
                 <br /><br />
                 <mat-label>Cantidad de turnos por día de la semana: </mat-label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success">Descargar Excel</button>
-                <button style="margin-left: 10px;" type="button" class="btn btn-danger">Descargar PDF</button>
+                <button style="margin-left: 10px;" type="button" class="btn btn-success" (click)="descargarInformeProfesionales(5)">Descargar Excel</button>
                 <button style="margin-left: 10px;" type="button" class="btn btn-info" (click)="verGrafico(5)">Ver Grafico</button>
             </mat-expansion-panel>
         </mat-expansion-panel>

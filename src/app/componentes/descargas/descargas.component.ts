@@ -4,6 +4,7 @@ import { FirebaseService } from '../../servicios/firebase.service';
 import { OperacionesPorEspecialidad } from '../../clases/operacionesPorEspecialidad';
 import { Turno } from 'src/app/clases/turno';
 import { ObjetoChart } from 'src/app/clases/objetoChart';
+import { Excel3 } from 'src/app/clases/excel3';
 
 @Component({
   selector: 'app-descargas',
@@ -44,35 +45,39 @@ export class DescargasComponent implements OnInit {
     this.excelService.exportAsExcelFile(data, nombre);
   }
 
-  descargarInformeProfesionales(tipoDeDescarga: number, tipoDeInforme: number) {
-    if (tipoDeDescarga == 1) {//excel
-      if (tipoDeInforme == 1) {//Días y horarios que ingresaron al sistema
-        this.exportarComoExcel(this.logProfesionales, "Log de Profesionales");
-      }
-      else if (tipoDeInforme == 2) {//Cantidad de operaciones por especialidad
-        var rv = [];
-        var helper = {};
-        var result = this.turnos.reduce(function (r, o) {
-          var key = o.profesional.uid + '-' + o.especialidadAtendida;
-
-          if (!helper[key]) {
-            helper[key] = Object.assign({}, o);
-            r.push(helper[key]);
-          } else {
-            helper[key].instances += o.instances;
-          }
-
-          return r;
-        }, []);
-
-        result.forEach(r => {
-          rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances.toString()));
-        });
-        this.exportarComoExcel(rv, "Operaciones por especialidad");
-      }
+  descargarInformeProfesionales(tipoDeInforme: number) {
+    if (tipoDeInforme == 1) {//Días y horarios que ingresaron al sistema
+      this.exportarComoExcel(this.logProfesionales, "Log de Profesionales");
     }
-    else if (tipoDeDescarga == 2) {//pdf
+    else if (tipoDeInforme == 2) {//Cantidad de operaciones por especialidad
+      var rv = [];
+      var helper = {};
+      var result = this.turnos.reduce(function (r, o) {
+        var key = o.profesional.uid + '-' + o.especialidadAtendida;
 
+        if (!helper[key]) {
+          helper[key] = Object.assign({}, o);
+          r.push(helper[key]);
+        } else {
+          helper[key].instances += o.instances;
+        }
+
+        return r;
+      }, []);
+
+      result.forEach(r => {
+        rv.push(new OperacionesPorEspecialidad(r.profesional.nombre, r.profesional.apellido, r.especialidadAtendida, r.instances.toString()));
+      });
+      this.exportarComoExcel(rv, "Operaciones por especialidad");
+    }
+    else if(tipoDeInforme == 3){
+      this.descargarExcelInforme3()
+    }
+    else if(tipoDeInforme == 4){
+      this.descargarExcelInforme4()
+    }
+    else if(tipoDeInforme == 5){
+      this.descargarExcelInforme5()
     }
   }
 
@@ -327,6 +332,126 @@ export class DescargasComponent implements OnInit {
     objeto.TextoDos = "Turnos";
     objeto.Data.push(objeto.ObjetoDeLaData);
     this.objetoParaChart = objeto;
+  }
+
+  descargarExcelInforme3(){
+    var rv = [];
+    var objeto = new Excel3("","");
+    var result = this.turnos.reduce(function (r, a) {
+      r[a.profesional.uid] = r[a.profesional.uid] || [];
+      r[a.profesional.uid].push(a);
+      return r;
+    }, Object.create(null));
+
+    console.log(result);
+    Object.keys(result).forEach(element => {
+      objeto.ApellidoProfesional = result[element][0].profesional.apellido;
+      objeto.CantidadDeTurnos = result[element].length;
+      rv.push(new Excel3(objeto.ApellidoProfesional, objeto.CantidadDeTurnos));
+    });
+    this.exportarComoExcel(rv, "Profesionales por cantidad de turnos");
+  }
+
+  descargarExcelInforme4(){
+    this.verComponenteGraficoDos = false;
+    this.verComponenteGraficoTres = false;
+    this.verComponenteGraficoCuatro = false;
+    this.verComponenteGraficoCinco = false;
+    this.objetoParaChart = null;
+    var objeto = new ObjetoChart([], "", "", []);
+    var lunesArray = [];
+    var martesArray = [];
+    var miercolesArray = [];
+    var juevesArray = [];
+    var viernesArray = [];
+    var sabadosArray = [];
+
+    this.usuarios.forEach(usuario => {
+      if (usuario.tipo == "2") {
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Lunes")) {
+          lunesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Martes")) {
+          martesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Miercoles")) {
+          miercolesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Jueves")) {
+          juevesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Viernes")) {
+          viernesArray.push(usuario);
+        }
+        if (usuario.disponibilidad && usuario.disponibilidad.includes("Sabado")) {
+          sabadosArray.push(usuario);
+        }
+      }
+    });
+    objeto.ObjetoDeLaData.data.push(lunesArray.length);
+    objeto.ObjetoDeLaData.data.push(martesArray.length);
+    objeto.ObjetoDeLaData.data.push(miercolesArray.length);
+    objeto.ObjetoDeLaData.data.push(juevesArray.length);
+    objeto.ObjetoDeLaData.data.push(viernesArray.length);
+    objeto.ObjetoDeLaData.data.push(sabadosArray.length);
+    objeto.ObjetoDeLaData.name = "Medicos por cantidad de dias";
+    objeto.Categorias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    objeto.TextoUno = "Profesionales por cantidad de dias";
+    objeto.TextoDos = "Profesionales";
+    objeto.Data.push(objeto.ObjetoDeLaData);
+    this.objetoParaChart = objeto;
+    console.log(this.objetoParaChart)
+  }
+
+  descargarExcelInforme5(){
+    this.verComponenteGraficoDos = false;
+    this.verComponenteGraficoTres = false;
+    this.verComponenteGraficoCuatro = false;
+    this.verComponenteGraficoCinco = false;
+    this.objetoParaChart = null;
+    var objeto = new ObjetoChart([], "", "", []);
+    var lunesArray = [];
+    var martesArray = [];
+    var miercolesArray = [];
+    var juevesArray = [];
+    var viernesArray = [];
+    var sabadosArray = [];
+
+    this.auxTurnos.forEach(turno => {
+      if (turno.fecha) {
+        if (turno.fecha.getDay() == 1) {
+          lunesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 2) {
+          martesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 3) {
+          miercolesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 4) {
+          juevesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 5) {
+          viernesArray.push(turno);
+        }
+        if (turno.fecha.getDay() == 6) {
+          sabadosArray.push(turno);
+        }
+      }
+    });
+    objeto.ObjetoDeLaData.data.push(lunesArray.length);
+    objeto.ObjetoDeLaData.data.push(martesArray.length);
+    objeto.ObjetoDeLaData.data.push(miercolesArray.length);
+    objeto.ObjetoDeLaData.data.push(juevesArray.length);
+    objeto.ObjetoDeLaData.data.push(viernesArray.length);
+    objeto.ObjetoDeLaData.data.push(sabadosArray.length);
+    objeto.ObjetoDeLaData.name = "Turnos por dias";
+    objeto.Categorias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    objeto.TextoUno = "Cantidad de turnos por día de la semana";
+    objeto.TextoDos = "Turnos";
+    objeto.Data.push(objeto.ObjetoDeLaData);
+    this.objetoParaChart = objeto;
+    console.log(this.objetoParaChart)
   }
 
 }
