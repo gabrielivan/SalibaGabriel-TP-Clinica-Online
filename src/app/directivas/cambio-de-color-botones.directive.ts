@@ -1,4 +1,5 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input,
+  Renderer2, OnChanges, SimpleChanges} from '@angular/core';
 
 @Directive({
   selector: '[appCambioDeColorBotones]'
@@ -15,14 +16,10 @@ export class CambioDeColorBotonesDirective {
     this.cambiarColor(this.estado);
   }
 
-  @HostListener('mouseleave') onMouseLeave(){
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.estado = this.estadoDelTurno.toString();
     this.cambiarColor(this.estado);
   }
-
-  @HostListener('mouseenter') onMouseEnter(){
-    this.cambiarColor(this.estado);
-  }
-
   
   cambiarColor(estado: string) {
     switch (estado) {
