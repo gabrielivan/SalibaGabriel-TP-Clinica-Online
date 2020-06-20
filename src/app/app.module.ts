@@ -50,6 +50,7 @@ import { UsuarioDetalleComponent } from './componentes/usuario-detalle/usuario-d
 import { DescargasComponent } from './componentes/descargas/descargas.component';
 import { GraficosComponent } from './componentes/graficos/graficos.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { CambioDeColorBotonesDirective } from './directivas/cambio-de-color-botones.directive';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     UsuarioDetalleComponent,
     DescargasComponent,
     GraficosComponent,
+    CambioDeColorBotonesDirective,
   ],
   imports: [
     BrowserModule,

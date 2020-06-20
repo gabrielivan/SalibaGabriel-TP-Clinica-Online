@@ -13,12 +13,8 @@
     <tbody>
       <tr *ngFor="let turno of turnos">
         <td>{{turno.fecha}}</td>
-        
-        <td *ngIf="turno.estado == 1"> <button type="button" class="btn btn-warning">Pendiente</button></td>
-        <td *ngIf="turno.estado == 2"> <button type="button" class="btn btn-primary">Aceptado</button></td>
-        <td *ngIf="turno.estado == 3"> <button type="button" class="btn btn-danger">Cancelado</button></td>
-        <td *ngIf="turno.estado == 4"> <button type="button" class="btn btn-success">Terminado</button></td>
-        <td *ngIf="turno.estado == 5"> <button type="button" class="btn btn-dark">Rechazado</button></td>
+
+        <td> <button [appCambioDeColorBotones]="turno.estado" type="button" class="btn btn">Estado del turno</button></td>
 
         <td *ngIf="turno.resena != ''"> <button (click)="verResena(turno)" type="button" class="btn btn-info">Reseña</button></td>
         <td *ngIf="turno.resena == ''"> <button type="button" class="btn btn-danger">Sin Reseña</button></td>
