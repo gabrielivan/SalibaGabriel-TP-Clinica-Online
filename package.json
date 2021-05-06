@@ -25,7 +25,7 @@
     "@angular/router": "~9.0.7",
     "file-saver": "^2.0.2",
     "firebase": "^7.14.4",
-    "highcharts": "^8.1.1",
+    "highcharts": "^9.0.0",
     "highcharts-angular": "^2.4.0",
     "moment": "^2.26.0",
     "ng-recaptcha": "^5.0.0",
